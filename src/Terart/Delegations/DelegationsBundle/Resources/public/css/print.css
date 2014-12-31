@@ -1,0 +1,45 @@
+@media print {
+
+    .paddingTop
+    {
+        padding-top: 20px;
+    }
+
+    .panel-default
+    {
+        border: none;
+    }
+
+    a:after{
+        content:"" !important;
+        /*font-size:0.8em;*/
+        /*font-weight:normal;*/
+    }
+
+
+    @page :left {
+        margin: 1.0cm;
+    }
+
+    @page :right {
+        margin: 1.0cm;
+    }
+
+    div.table-responsive
+    {
+        overflow: visible;
+    }
+
+    div.table-responsive.printable table
+    {
+        /*table-layout: fixed;*/
+        /*width: 80em !important;*/
+    }
+
+    div.table-responsive.printable table td
+    {
+        text-align: left ;
+        padding: 2px;
+        /*width: 5em !important;*/
+    }
+}

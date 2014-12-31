@@ -1,0 +1,70 @@
+security:
+    encoders:
+        Terart\Delegations\DelegationsBundle\Entity\Users:
+          algorithm: sha512
+          encode_as_base64: false
+          iterations: 1
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+            ROLE_ADMIN:       ROLE_USER
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [user_db]
+        user_db:
+            entity: { class: Terart\Delegations\DelegationsBundle\Entity\Users, property: username }
+
+    firewalls:
+        main:
+            pattern: ^/
+            provider: user_db
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                remember_me: true
+                use_referer: false
+                use_forward: false
+                always_use_default_target_path: false
+                default_target_path: /%locale%/delegations
+                target_path_parameter: _target_path
+                username_parameter: _username
+                password_parameter: _password
+                require_previous_session: true
+            logout:
+                path: /logout
+                target: /login
+                invalidate_session:  false
+            anonymous: true
+            remember_me:
+                key: "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path: /
+                domain: ~ # Defaults to the current domain from $_SERVER
+            security: true
+            access_denied_url: /.*
+            #trusted_sso:
+            #    manager: admin_sso
+            #    login_action: false         # BeSimpleSsoAuthBundle:TrustedSso:login
+            #    logout_action: false        # BeSimpleSsoAuthBundle:TrustedSso:logout
+            #    create_users: true
+            #    created_users_roles: [ROLE_USER ]
+            #    check_path: /
+
+        sso_firewall:
+            pattern: ^/
+            anonymous: ~
+            trusted_sso:
+                manager: admin_sso
+                login_action: false         # BeSimpleSsoAuthBundle:TrustedSso:login
+                logout_action: false        # BeSimpleSsoAuthBundle:TrustedSso:logout
+                create_users: true
+                created_users_roles: [ROLE_USER ]
+                check_path: /
+
+    access_control:
+            #- { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+            - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            #- { path: ^/.*, role: ROLE_USER, requires_channel: https }
+            - { path: ^/.*, role: ROLE_USER }

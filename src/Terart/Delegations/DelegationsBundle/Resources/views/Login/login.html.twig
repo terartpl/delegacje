@@ -1,0 +1,10 @@
+{% extends 'DelegationsBundle::base_simple.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% if error.message is defined %}{{error.message}} {% endif %}
+    <div class="col-md-offset-4 col-md-4">
+        {% include "DelegationsBundle:Login:login_template.html.twig" with {"path": path("user_login_check"), "username": username} %}
+    </div>
+{% endblock %}

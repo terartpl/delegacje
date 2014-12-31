@@ -1,0 +1,53 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.ViewAction'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('company') }}" class="btn btn-default">{{ 'translations.CompanyList'|trans({}, 'DelegationsBundle') }}</a>
+                    <a href="{{ path('company_edit', {id: entity.id}) }}" class="btn btn-default">{{ 'translations.EditAction'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <table class="tables">
+                    <tbody>
+                    <tr>
+                        <th>{{ 'translations.Id'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Company'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Street'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.street }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.HouseNumber'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.number }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.ZipCode'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.zipCode }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Locality'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.locality }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Country'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{% if entity.country.name is defined %}{{ ('translations.' ~ entity.country.name)|trans({}, 'countries') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Nip'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.nip }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

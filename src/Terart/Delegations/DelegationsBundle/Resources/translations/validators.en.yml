@@ -1,0 +1,2 @@
+translations.alphaNumericErrMsg: "The given string contains an illegal character: it can only contain letters or numbers"
+translations.engineCapacityErrMsg: "This value should not be empty"

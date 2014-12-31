@@ -1,0 +1,18 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.AddDelegationType'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('delegationtype_list') }}" class="btn btn-default">{{ 'translations.DelegationTypeList'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                {% form_theme form 'DelegationsBundle:Theme:create_delegation_type_form_theme.html.twig' %}
+                {{ form(form, {'attr': {'novalidate': 'novalidate', 'id': 'delegationtype'}}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

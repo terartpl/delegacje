@@ -1,0 +1,205 @@
+<div class="table-responsive col-md-8 nopadding-left">
+    <table class="table table-no-border table-hover">
+        <tbody>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Nrdelegation'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.nrDelegation }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Placeacost'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.placeACost }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Destination'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.destination }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Datefrom'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.dateFrom|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Dateto'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.dateTo|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Purposeoftrip'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.purposeOfTrip }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.TypeDelegation'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.type.hashKey|translation() }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.TargetCountryDelegations'|trans({}, 'dict') }}:</th>
+            <td class="nopadding-top-bottom">
+                {% if entity.targetCountryType.id == 1 %}
+                    {{ entity.targetCountryType.name|trans({}, 'dict') }}
+                {% else %}
+                    {{ ('translations.' ~ entity.targetCountry.name)|trans({}, 'countries') }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Isprivatecar'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{% if entity.isPrivateCar %}{{ 'translations.Yes'|trans({}, "DelegationsBundle") }}{% else %}{{ 'translations.No'|trans({}, "DelegationsBundle") }}{% endif %}</td>
+        </tr>
+        {% if entity.isPrivateCar %}
+            <tr>
+                <th class="nopadding-top-bottom">{{ 'translations.Address'|trans({}, 'DelegationsBundle') }}:</th>
+                <td class="nopadding-top-bottom">{{ entity.address }}</td>
+            </tr>
+            <tr>
+                <th class="nopadding-top-bottom">{{ 'translations.Carnumber'|trans({}, 'DelegationsBundle') }}:</th>
+                <td class="nopadding-top-bottom">{{ entity.carNumber }}</td>
+            </tr>
+            <tr>
+                <th class="nopadding-top-bottom">{{ 'translations.Enginecapacity'|trans({}, 'DelegationsBundle') }}:</th>
+                <td class="nopadding-top-bottom">{% if entity.engineCapacity %}{{ 'translations.gte'|trans({}, "DelegationsBundle") }}{% else %}{{ 'translations.lt'|trans({}, "DelegationsBundle") }}{% endif %}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Status'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">
+                {% if entity.status == 0 %}
+                    {{ 'translations.Added'|trans({}, 'DelegationsBundle') }}
+                {% elseif entity.status == 1 %}
+                    {{ 'translations.SentSSC'|trans({}, 'DelegationsBundle') }}
+                {% elseif entity.status == 2 %}
+                    {{ 'translations.Posted'|trans({}, 'DelegationsBundle') }}
+                {% elseif entity.status == 3 %}
+                    {{ 'translations.Settled'|trans({}, 'DelegationsBundle') }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Created'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.created|date('Y-m-d') }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="clearfix"></div>
+{% set sumKmCost = 0.0 %}
+{% set sumKm = 0 %}
+{% if km is not empty %}
+    <h4>{{ "translations.SettlementKm"|trans({}, "DelegationsBundle") }}</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>LP</th>
+            <th>{{ 'translations.DepartureDate'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.From'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.To'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.DrivenKm'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.RatePerKm'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.Amount'|trans({}, 'DelegationsBundle') }} {{ default_currency }}</th>
+        </tr>
+        </thead>
+        <tbody id="settlementKmCollection">
+        {% for k in km %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ k.settlementKm.dateOfDeparture|date('Y-m-d') }}</td>
+                <td>{{ k.settlementKm.from }}</td>
+                <td>{{ k.settlementKm.to }}</td>
+                <td>{{ k.settlementKm.drivenKm }}</td>
+                <td>{{ k.settlementKm.ratePerKm|number_format(4, ',', '') }}</td>
+                <td>{{ k.settlementKm.value|number_format(2, ',', '') }}</td>
+                {% set sumKmCost = sumKmCost +  k.settlementKm.value %}
+                {% set sumKm = sumKm +  k.settlementKm.drivenKm %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody>
+        <th colspan="4">
+            <span class="pull-right">{{ 'translations.Sum'|trans({}, 'DelegationsBundle') }}:</span>
+        </th>
+        <th id="DrivenKmSum">{{ sumKm }}</th>
+        <th ></th>
+        <th id="DrivenKmValue">{{ sumKmCost|number_format(2, ',', '') }}</th>
+        </tbody>
+    </table>
+{% endif %}
+{% set sumAllAmount = 0 %}
+{% if ot is not empty %}
+    <h4>{{ "translations.SettlementOther"|trans({}, "DelegationsBundle") }}</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>LP</th>
+            <th>{{ 'translations.Amount'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.Currency'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.Converter'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.Amount'|trans({}, 'DelegationsBundle') }} {{ default_currency }}</th>
+            <th>{{ 'translations.TypeOfExpenditure'|trans({}, 'DelegationsBundle') }}</th>
+            <th>{{ 'translations.Description'|trans({}, 'DelegationsBundle') }}</th>
+        </tr>
+        </thead>
+        <tbody id="settlementOtherCollection">
+        {% for key, costType in costsTypeArray %}
+
+        {% endfor %}
+        {% set costsTypeArrayTmp = {} %}
+        {% for o in ot %}
+            <tr>
+                {% set sumAllAmount = sumAllAmount + o.settlementOfOtherCost.conversionAmount %}
+                <td>{{ loop.index }}</td>
+                <td>{{ o.settlementOfOtherCost.originalAmount|number_format(2, ',', '') }}</td>
+                <td>{{ o.settlementOfOtherCost.currency }}</td>
+                <td>{% if o.settlementOfOtherCost.exchangeRate in not null %}{{ o.settlementOfOtherCost.exchangeRate|number_format(4, ',', '') }}{% endif %}</td>
+                <td class="">{{ o.settlementOfOtherCost.conversionAmount|number_format(2, ',', '') }}</td>
+                <td>{{ costsTypeArray[o.settlementOfOtherCost.typeOfExpenditure.id].name }}</td>
+                <td>{{ o.settlementOfOtherCost.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tbody>
+        <th colspan="4">
+            <span class="pull-right">{{ 'translations.Sum'|trans({}, 'DelegationsBundle') }}:</span>
+        </th>
+        <th>{{ sumAllAmount|number_format(2, ',', '') }}</th>
+        <th colspan="2" ></th>
+        </tbody>
+    </table>
+{% endif %}
+<div class="clearfix"></div>
+<h4>{{ "translations.SettlementAll"|trans({}, "DelegationsBundle") }}</h4>
+<div class="table-responsive col-md-8 nopadding-left">
+    <table class="table table-no-border">
+        <tbody id="">
+        <tr>
+            <td class="nopadding-top-bottom">{{ 'translations.CostTripInView'|trans({}, "DelegationsBundle") }} - {{ 'translations.SettlementKm'|trans({}, "DelegationsBundle")|lower }}:</td>
+            <td class="nopadding-top-bottom"><p id="totalTravelExpenses" class="text-right costType">{{ sumKmCost|number_format(2, ',', '') }}</p></td>
+        </tr>
+        {% for key, costType in costsTypeArray %}
+            <tr>
+                <td class="nopadding-top-bottom">{{ 'translations.CostTripInView'|trans({}, "DelegationsBundle") }} - {{ costType.name|lower }}: </td>
+                <td class="nopadding-top-bottom"><p id="costType{{ key }}" class="text-right costType">{{ costType.costs|number_format(2, ',', '') }}</p></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.ThetotalCostTrip'|trans({}, "DelegationsBundle") }}:</th>
+            <th class="nopadding-top-bottom"><p id="thetotalCostTrip" class="text-right">{{ (sumKmCost + sumAllAmount)|number_format(2, ',', '') }}</p></th>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Advance'|trans({}, "DelegationsBundle") }}:</th>
+            <th class="nopadding-top-bottom"><p id="thetotalCostTrip" class="text-right">{{ entity.advance|number_format(2, ',', '') }}</p></th>
+        </tr>
+        {% set subAdvance = entity.advance - (sumKmCost + sumAllAmount) %}
+        {% if subAdvance > 0 %}
+            <tr>
+                <th class="nopadding-top-bottom">{{ 'translations.AmountRecovered'|trans({}, "DelegationsBundle") }}:</th>
+                <th class="nopadding-top-bottom"><p id="amountRecovered" class="text-right">{{ subAdvance|number_format(2, ',', '') }}</p></th>
+            </tr>
+        {% else %}
+            <tr>
+                <th class="nopadding-top-bottom">{{ 'translations.AmountPaid'|trans({}, "DelegationsBundle") }}:</th>
+                <th class="nopadding-top-bottom"><p id="amountPaid" class="text-right">{{ subAdvance|abs|number_format(2, ',', '') }}</p></th>
+            </tr>
+        {% endif %}
+    </table>
+</div>
+<div class="clearfix"></div>

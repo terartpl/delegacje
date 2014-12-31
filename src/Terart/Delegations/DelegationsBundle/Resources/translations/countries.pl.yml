@@ -1,0 +1,241 @@
+translations.GB: 'United Kingdom'
+translations.US: 'United States'
+translations.AF: Afghanistan
+translations.AL: Albania
+translations.DZ: Algeria
+translations.AS: 'American Samoa'
+translations.AD: Andorra
+translations.AO: Angola
+translations.AI: Anguilla
+translations.AQ: Antarctica
+translations.AG: 'Antigua And Barbuda'
+translations.AR: Argentina
+translations.AM: Armenia
+translations.AW: Aruba
+translations.AU: Australia
+translations.AT: Austria
+translations.AZ: Azerbaijan
+translations.BS: Bahamas
+translations.BH: Bahrain
+translations.BD: Bangladesh
+translations.BB: Barbados
+translations.BY: Belarus
+translations.BE: Belgium
+translations.BZ: Belize
+translations.BJ: Benin
+translations.BM: Bermuda
+translations.BT: Bhutan
+translations.BO: Bolivia
+translations.BA: 'Bosnia And Herzegowina'
+translations.BW: Botswana
+translations.BV: 'Bouvet Island'
+translations.BR: Brazil
+translations.IO: 'British Indian Ocean Territory'
+translations.BN: 'Brunei Darussalam'
+translations.BG: Bulgaria
+translations.BF: 'Burkina Faso'
+translations.BI: Burundi
+translations.KH: Cambodia
+translations.CM: Cameroon
+translations.CA: Canada
+translations.CV: 'Cape Verde'
+translations.KY: 'Cayman Islands'
+translations.CF: 'Central African Republic'
+translations.TD: Chad
+translations.CL: Chile
+translations.CN: China
+translations.CX: 'Christmas Island'
+translations.CC: 'Cocos (Keeling) Islands'
+translations.CO: Colombia
+translations.KM: Comoros
+translations.CG: Congo
+translations.CD: 'Congo, The Democratic Republic Of The'
+translations.CK: 'Cook Islands'
+translations.CR: 'Costa Rica'
+translations.CI: 'Cote D''Ivoire'
+translations.HR: 'Croatia (Local Name: Hrvatska)'
+translations.CU: Cuba
+translations.CY: Cyprus
+translations.CZ: 'Czech Republic'
+translations.DK: Denmark
+translations.DJ: Djibouti
+translations.DM: Dominica
+translations.DO: 'Dominican Republic'
+translations.TP: 'East Timor'
+translations.EC: Ecuador
+translations.EG: Egypt
+translations.SV: 'El Salvador'
+translations.GQ: 'Equatorial Guinea'
+translations.ER: Eritrea
+translations.EE: Estonia
+translations.ET: Ethiopia
+translations.FK: 'Falkland Islands (Malvinas)'
+translations.FO: 'Faroe Islands'
+translations.FJ: Fiji
+translations.FI: Finland
+translations.FR: France
+translations.FX: 'France, Metropolitan'
+translations.GF: 'French Guiana'
+translations.PF: 'French Polynesia'
+translations.TF: 'French Southern Territories'
+translations.GA: Gabon
+translations.GM: Gambia
+translations.GE: Georgia
+translations.DE: Germany
+translations.GH: Ghana
+translations.GI: Gibraltar
+translations.GR: Greece
+translations.GL: Greenland
+translations.GD: Grenada
+translations.GP: Guadeloupe
+translations.GU: Guam
+translations.GT: Guatemala
+translations.GN: Guinea
+translations.GW: Guinea-Bissau
+translations.GY: Guyana
+translations.HT: Haiti
+translations.HM: 'Heard And Mc Donald Islands'
+translations.VA: 'Holy See (Vatican City State)'
+translations.HN: Honduras
+translations.HK: 'Hong Kong'
+translations.HU: Hungary
+translations.IS: Iceland
+translations.IN: India
+translations.ID: Indonesia
+translations.IR: 'Iran (Islamic Republic Of)'
+translations.IQ: Iraq
+translations.IE: Ireland
+translations.IL: Israel
+translations.IT: Italy
+translations.JM: Jamaica
+translations.JP: Japan
+translations.JO: Jordan
+translations.KZ: Kazakhstan
+translations.KE: Kenya
+translations.KI: Kiribati
+translations.KP: 'Korea, Democratic People''s Republic Of'
+translations.KR: 'Korea, Republic Of'
+translations.KW: Kuwait
+translations.KG: Kyrgyzstan
+translations.LA: 'Lao People''s Democratic Republic'
+translations.LV: Latvia
+translations.LB: Lebanon
+translations.LS: Lesotho
+translations.LR: Liberia
+translations.LY: 'Libyan Arab Jamahiriya'
+translations.LI: Liechtenstein
+translations.LT: Lithuania
+translations.LU: Luxembourg
+translations.MO: Macau
+translations.MK: 'Macedonia, Former Yugoslav Republic Of'
+translations.MG: Madagascar
+translations.MW: Malawi
+translations.MY: Malaysia
+translations.MV: Maldives
+translations.ML: Mali
+translations.MT: Malta
+translations.MH: 'Marshall Islands'
+translations.MQ: Martinique
+translations.MR: Mauritania
+translations.MU: Mauritius
+translations.YT: Mayotte
+translations.MX: Mexico
+translations.FM: 'Micronesia, Federated States Of'
+translations.MD: 'Moldova, Republic Of'
+translations.MC: Monaco
+translations.MN: Mongolia
+translations.MS: Montserrat
+translations.MA: Morocco
+translations.MZ: Mozambique
+translations.MM: Myanmar
+translations.NA: Namibia
+translations.NR: Nauru
+translations.NP: Nepal
+translations.NL: Netherlands
+translations.AN: 'Netherlands Antilles'
+translations.NC: 'New Caledonia'
+translations.NZ: 'New Zealand'
+translations.NI: Nicaragua
+translations.NE: Niger
+translations.NG: Nigeria
+translations.NU: Niue
+translations.NF: 'Norfolk Island'
+translations.MP: 'Northern Mariana Islands'
+translations.NO: Norway
+translations.OM: Oman
+translations.PK: Pakistan
+translations.PW: Palau
+translations.PA: Panama
+translations.PG: 'Papua New Guinea'
+translations.PY: Paraguay
+translations.PE: Peru
+translations.PH: Philippines
+translations.PN: Pitcairn
+translations.PL: Poland
+translations.PT: Portugal
+translations.PR: 'Puerto Rico'
+translations.QA: Qatar
+translations.RE: Reunion
+translations.RO: Romania
+translations.RU: 'Russian Federation'
+translations.RW: Rwanda
+translations.KN: 'Saint Kitts And Nevis'
+translations.LC: 'Saint Lucia'
+translations.VC: 'Saint Vincent And The Grenadines'
+translations.WS: Samoa
+translations.SM: 'San Marino'
+translations.ST: 'Sao Tome And Principe'
+translations.SA: 'Saudi Arabia'
+translations.SN: Senegal
+translations.SC: Seychelles
+translations.SL: 'Sierra Leone'
+translations.SG: Singapore
+translations.SK: 'Slovakia (Slovak Republic)'
+translations.SI: Slovenia
+translations.SB: 'Solomon Islands'
+translations.SO: Somalia
+translations.ZA: 'South Africa'
+translations.GS: 'South Georgia, South Sandwich Islands'
+translations.ES: Spain
+translations.LK: 'Sri Lanka'
+translations.SH: 'St. Helena'
+translations.PM: 'St. Pierre And Miquelon'
+translations.SD: Sudan
+translations.SR: Suriname
+translations.SJ: 'Svalbard And Jan Mayen Islands'
+translations.SZ: Swaziland
+translations.SE: Sweden
+translations.CH: Switzerland
+translations.SY: 'Syrian Arab Republic'
+translations.TW: Taiwan
+translations.TJ: Tajikistan
+translations.TZ: 'Tanzania, United Republic Of'
+translations.TH: Thailand
+translations.TG: Togo
+translations.TK: Tokelau
+translations.TO: Tonga
+translations.TT: 'Trinidad And Tobago'
+translations.TN: Tunisia
+translations.TR: Turkey
+translations.TM: Turkmenistan
+translations.TC: 'Turks And Caicos Islands'
+translations.TV: Tuvalu
+translations.UG: Uganda
+translations.UA: Ukraine
+translations.AE: 'United Arab Emirates'
+translations.UM: 'United States Minor Outlying Islands'
+translations.UY: Uruguay
+translations.UZ: Uzbekistan
+translations.VU: Vanuatu
+translations.VE: Venezuela
+translations.VN: 'Viet Nam'
+translations.VG: 'Virgin Islands (British)'
+translations.VI: 'Virgin Islands (U.S.)'
+translations.WF: 'Wallis And Futuna Islands'
+translations.EH: 'Western Sahara'
+translations.YE: Yemen
+translations.YU: Yugoslavia
+translations.ZM: Zambia
+translations.ZW: Zimbabwe
+translations.ChooseOption: Wybierz
+translations.Country: Kraj

@@ -1,0 +1,18 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.EditAction'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('company') }}" class="btn btn-default">{{ 'translations.CompanyList'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                {% form_theme edit_form 'DelegationsBundle:Theme:create_company_form_theme.html.twig' %}
+                {{ form(edit_form, {'attr': {'novalidate': 'novalidate', 'id': 'company'}}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

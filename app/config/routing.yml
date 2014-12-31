@@ -1,0 +1,22 @@
+delegations:
+    resource: "@DelegationsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user_login:
+    path:     /login
+    defaults: { _controller: DelegationsBundle:Security:login }
+
+user_login_check:
+    path:     /login_check
+
+user_logout:
+    path:     /logout
+    defaults: { _controller: DelegationsBundle:Security:logout }
+
+login:
+    pattern: /login
+logout:
+    pattern: /logout
+
+

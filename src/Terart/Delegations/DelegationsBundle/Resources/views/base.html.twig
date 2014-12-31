@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{ pageTitle|default("Hello!") }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+        {% javascripts
+        '@DelegationsBundle/Resources/public/js/jquery-1.9.1.min.js'
+        '@DelegationsBundle/Resources/public/js/jquery.validate.js'
+        '@DelegationsBundle/Resources/public/js/bootstrap/bootstrap3.3.js'
+        '@DelegationsBundle/Resources/public/js/bootstrapv3-datetimepicker/js/moment.js'
+        '@DelegationsBundle/Resources/public/js/bootstrapv3-datetimepicker/js/bootstrap-datetimepicker.min.js'
+        '@DelegationsBundle/Resources/public/js/main.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% stylesheets
+        '@DelegationsBundle/Resources/public/css/bootstrap/bootstrap3.3.css'
+        '@DelegationsBundle/Resources/public/css/main.css'
+        '@DelegationsBundle/Resources/public/css/bootstrapv3-datetimepicker/css/bootstrap-datetimepicker.css'
+        '@DelegationsBundle/Resources/public/css/font-awesome.css'
+        '@DelegationsBundle/Resources/public/css/print.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('/bundles/delegations/css/bootstrap/bootstrap.css.map') }}"/>
+        {% stylesheets
+        output='fonts/icomoon.eot'
+        'bundles/delegations/fonts/icomoon.eot'
+        %}{% endstylesheets %}
+        {% stylesheets
+        output='fonts/icomoon.woff'
+        'bundles/delegations/fonts/icomoon.woff'
+        %}{% endstylesheets %}
+        {% stylesheets
+        output='fonts/icomoon.ttf'
+        'bundles/delegations/fonts/icomoon.ttf'
+        %}{% endstylesheets %}
+
+    </head>
+    <body>
+        <div class="container">
+            {# MENU TOP #}
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        {% set logoName = '/logo/default_logo.png' %}
+                        {% set logoPath = kernel.rootdir ~ '/../web' ~ logoName %}
+                        {% if file_exists(logoPath) %}
+                            <a class="img-responsive" href="/"><img src="{{ logoName }}" class="siteLogo" alt="Site Logo"/></a>
+                        {% else %}
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                        {# SEARCH WIDGET #}
+                        <div class="col-md-6">
+                            <ul class="nav navbar-nav navbar-left">
+                                {% if app.user.username is defined %}
+                                    <li><p class="navbar-text navbar-right"><a href="#" class="navbar-link">{{ "translations.logInAs"|trans({}, "DelegationsBundle") }} {{ app.user.username }}</a></p></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {# SEARCH WIDGET #}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" role="button" aria-expanded="false">{{ 'translations.ChangeLanguage'|trans({}, "DelegationsBundle") }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for locale in locale_list %}
+                                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}">{{ ('translations.' ~ locale)|trans({}, "DelegationsBundle") }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% if app.user.username is defined %}
+                            <li><a href="{{ path("users_reset", {id: app.user.id}) }}">{{ 'translations.ResetAction'|trans({}, "DelegationsBundle") }}</a></li>
+                            {% if app.user.isadmin %}
+                            <li class="dropdown">
+                                <a href="#" role="button" aria-expanded="false">{{ 'translations.Admin'|trans({}, "DelegationsBundle") }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ path("users") }}">{{ 'translations.UsersList'|trans({}, "DelegationsBundle") }}</a>
+                                        {#<ul class="dropdown-menu sub-menu">
+                                            <a href="{{ path('users_create') }}">{{ 'translations.CreateNewUser'|trans({}, 'DelegationsBundle') }}</a>
+                                        </ul>#}
+                                    </li>
+                                    <li><a href="{{ path('company') }}">{{ 'translations.CompanyList'|trans({}, 'DelegationsBundle') }}</a></li>
+                                    <li><a href="{{ path('delegationtype_list') }}">{{ 'translations.DelegationTypeList'|trans({}, 'DelegationsBundle') }}</a></li>
+                                    <li><a href="{{ path('type-of-expenditure') }}">{{ 'translations.typeOfExpenditureList'|trans({}, 'DelegationsBundle') }}</a></li>
+                                    <li><a href="{{ path('users_add_logo') }}">{{ 'translations.addLogo'|trans({}, 'DelegationsBundle') }}</a></li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                            <li><a href="{{ path("delegations") }}">{{ 'translations.DelegationsList'|trans({}, "DelegationsBundle") }}</a></li>
+                            <li><a href="{{ path("user_logout") }}">{{ 'translations.Logout'|trans({}, "DelegationsBundle") }}</a></li>
+                            {% else %}
+                                {% if app.request.attributes.get('_route') != "user_login" %}
+                                    <li id="loginLink">
+                                        <a href="{{ path("user_login") }}">{{ 'translations.Login'|trans({}, 'DelegationsBundle') }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            <li>&nbsp;</li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            {# END MENU TOP #}
+            {# CONTENT #}
+            <div class="row paddingTop">
+                <div class="">
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success hidden-print">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('info') %}
+                        <div class="alert alert-info hidden-print">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('warning') %}
+                        <div class="alert alert-warning hidden-print">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('danger') %}
+                        <div class="alert alert-danger hidden-print">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {#  #}
+                <div id="alert-container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alert-modal" aria-hidden="true"></div>
+                <div class="notifications top-right"></div>
+                <div class="col-md-12">
+                    {% block body %}{% endblock %}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            {# END CONTENT #}
+        </div>{# row mainContainer #}
+        {# FOOTER #}
+        {#<div id="footer" class="">
+            <div class="footerContainer">
+                <div class="col-md-11">
+                    <a href="#">Terms of use</a>|
+                    <a href="#">Privacy policy</a>
+                    <span class="pull-right">All rights reserved Â©</span>
+                </div>
+            </div>{# row footerContainer #}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

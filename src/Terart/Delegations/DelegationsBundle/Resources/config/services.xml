@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="delegations.localelistener"
+                 class="Terart\Delegations\DelegationsBundle\EventListener\LocaleListener">
+            <argument type="service" id="locale_listener"/>
+            <argument>%kernel.default_locale%</argument>
+            <argument type="service" id="router"/>
+            <argument>%locale_list%</argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+            <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
+        </service>
+        <service id="validator.delegation"
+                 class="Terart\Delegations\DelegationsBundle\Validator\Constraints\DelegationValidator">
+            <tag name="validator.constraint_validator" alias="delegation"/>
+        </service>
+
+        <service id="delegations.twig_extension" class="Terart\Delegations\DelegationsBundle\Extensions\TwigExtension">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="delegations.users_manager" class="Terart\Delegations\DelegationsBundle\Controller\UsersController">
+            <!--<argument>plain_value</argument>-->
+            <!--<argument>%parameter_name%</argument>-->
+        </service>
+
+        <service id="delegations.simple_image_manipulator" class="Terart\Delegations\DelegationsBundle\Controller\GraphicsController">
+            <!--<argument>plain_value</argument>-->
+            <!--<argument>%parameter_name%</argument>-->
+        </service>
+
+        <service id="delegations.twig.delegations_extension"
+                 class="Terart\Delegations\DelegationsBundle\Twig\DelegationsExtension">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="session.attribute_bag"/>
+            <tag name="twig.extension"/>
+        </service>
+
+
+    </services>
+    <!--<parameters>
+        <parameter key="security.exception_listener.class">Terart\Delegations\DelegationsBundle\Security\Firewall\ExceptionListener</parameter>
+    </parameters>-->
+
+</container>

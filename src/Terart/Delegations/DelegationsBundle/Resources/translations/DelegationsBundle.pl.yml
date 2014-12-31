@@ -1,0 +1,145 @@
+translations.Login: Login
+translations.PleaseLogIn: 'Zaloguj się'
+translations.Password: Hasło
+translations.DelegationsList: 'Lista delegacji'
+translations.CreateNewEntry: 'Dodaj delegacje'
+translations.Nrdelegation: 'Nr. delegacji'
+translations.Placeacost: 'Miejsce powstawania kosztu (MPK)'
+translations.Destination: 'Miejscowość docelowa'
+translations.Datefrom: Od
+translations.Dateto: Do
+translations.Purposeoftrip: 'Cel wyjazdu'
+translations.Isprivatecar: 'Samochód prywatny?'
+translations.Address: Adres
+translations.Carnumber: 'Nr. Rej. Pojazdu'
+translations.Enginecapacity: 'Pojemność silnika'
+translations.Issaved: 'Czy zapisany na dysku?'
+translations.Created: Utworzony
+translations.Id: Id
+translations.Actions: Akcje
+translations.ChooseOption: Wybierz
+translations.Back: Wstecz
+translations.TypeDelegation: 'Rodzaj delegacji'
+translations.Save: Zapisz
+translations.SettlementKm: 'Wydatki [km]'
+translations.DepartureDate: 'Data wyjazdu'
+translations.From: Skąd
+translations.To: Dokąd
+translations.DrivenKm: 'Liczba km.'
+translations.RatePerKm: 'Stawka za km.'
+translations.Value: Wartość
+translations.Close: Zamknij
+translations.Add: Dodaj
+translations.Error: 'Nieprawidłowa wartość'
+translations.Error.Text: 'Wartość musi być tekstem'
+translations.Error.Number: 'Wartość musi być liczbą'
+translations.Error.Max: 'Maksymalna wartość to:'
+translations.Error.Min: 'Minimalna wartość to:'
+translations.Error.Required: 'Wartość jest nieprawidłowa'
+translations.Sum: Razem
+translations.SettlementOther: 'Wydatki [inne]'
+translations.Amount: Kwota
+translations.Currency: Waluta
+translations.RateOfExchange: Kurs
+translations.Converter: Przelicznik
+translations.TypeOfExpenditure: 'Rodzaj wydatku'
+translations.Description: Opis
+translations.isExchangeRate: Przelicz
+translations.typeOfExpenditure: 'Rodzaj wydatku'
+translations.conversionAmount: 'Kwota po przeliczeniu'
+translations.Yes: Tak
+translations.No: Nie
+translations.Username: 'Nazwa użytkownika'
+translations.Name: Imię
+translations.Surname: Nazwisko
+translations.Company: Spółka
+translations.TotalTravelExpenses: 'Razem kosztów przejazdów'
+translations.TotalCostAccommodation: 'Razem kosztów noclegów'
+translations.TotalCostMeals: 'Razem kosztów posików'
+translations.TotalCostRepresentation: 'Razem kosztów reprezentacji'
+translations.TheSumOtherExpenses: 'Suma innych wydatków'
+translations.ThetotalCostTrip: 'Całkowity koszt wyjazdu'
+translations.Delete: Usuń
+translations.Logout: 'Wyloguj się'
+translations.exportedFile: 'Plik został wyeksportowany'
+translations.ViewAction: Podgląd
+translations.EditAction: Edycja
+translations.ExportAction: Export
+translations.DelegationNotFounded: 'Delegacja nie istnieje'
+translations.PrintAction: Drukuj
+translations.permissionDenied: 'Odmowa dostępu'
+translations.UsersList: 'Lista użytkowników'
+translations.CreateNewUser: 'Dodaj użytkownika'
+translations.Isadmin: 'Admin?'
+translations.RepeatPassword: 'Powtórz hasło'
+translations.Admin: 'Panel zarządzania'
+translations.ResetAction: 'Zmień hasło'
+translations.passwdChanged: 'Hasło zostało zmienione'
+translations.userNotExist: 'Użytkownik nie istnieje'
+translations.userHasDelegations: 'Nie możesz usunąć użytkownika, ponieważ posiada delegacje'
+translations.userHasOwn: 'Nie możesz usunąć swojego użytkownika'
+translations.areYouSure: 'Czy jesteś pewien?'
+translations.translations.Confirm: Zatwierdź
+translations.DelegationDeleted: 'Delegacja została usunięta'
+translations.logInAs: 'Zalogowany jako'
+translations.lt: 'Poniżej 2.0'
+translations.gte: 'Więcej lub równe 2.0'
+translations.SettlementAll: Podsumowanie
+translations.ViewDelegation: 'Podgląd delegacji'
+translations.EditDelegation: 'Edycja delegacji'
+translations.ltCanonical: lt_2
+translations.gteCanonical: gte_2
+translations.Status: Status
+translations.Added: Dodany
+translations.SentSSC: 'Wysłany do SSC'
+translations.Posted: Zaksiegowany
+translations.Settled: Rozliczony
+translations.DelegationAdded: 'Delegacja została dodana'
+translations.alphaNumericErrMsg: 'Podany tekst zawiera niedozwolone znaki. Dozwolone: ["a-z", "A-Z", "0-9", "_", "-"]'
+translations.ChangeSaved: 'Zmiany zostały zapisane'
+translations.ChangeLanguage: 'Zmień język'
+translations.pl: Polski
+translations.en: Angielski
+translations.Advance: Zaliczka
+translations.Payment: Wypłata
+translations.AmountRecovered: 'Kwota do zwrotu'
+translations.AmountPaid: 'Kwota do wypłaty'
+translations.Email: Email
+translations.CompanyList: 'Lista firm'
+translations.Street: Ulica
+translations.HouseNumber: 'Nr. domu'
+translations.ZipCode: 'Kod pocztowy'
+translations.Locality: Miejscowość
+translations.Country: Kraj
+translations.Nip: Nip
+translations.CreateNewCompany: 'Dodaj spółkę'
+translations.CompanyNotExist: 'Firma nie istnieje'
+translations.userHasCompany: 'Nie można usunąć spółki, jeśli są zdefiniowani dla niej użytkownicy'
+translations.DelegationTypeList: 'Lista rodzajów delegacji'
+translations.CreateNewDelegationType: 'Dodaj nowy rodzaj delegacji'
+translations.DelegatiotypeName: Nazwa
+translations.DelegatiotypeView: Podgląd rodzaju delegacji
+translations.DelegatiotypeEdit: Edycja rodzaju delegacji
+translations.AddDelegationType: Dodaj rodzaj delegacji
+translations.DelegationTypeNotExist: Rodzaj delegacji nie istnieje
+translations.typeOfExpenditureList: Lista rodzajów wydatków
+translations.CreateNewexpenditure: Dodaj nowy typ wydatku
+translations.typeOfExpenditureNotFound: Nie znaleziono podanego rodzaju wydatku
+translations.typeOfExpenditureDeleted: Rodzaj wydatku został usunięty
+translations.typeOfExpenditureEdited: Edycja zakończona sukcesem
+translations.typeOfExpenditureAdded: Rodzaj wydatku został dodany
+translations.DelegatiotypeDeleted: Rodzaj delegacji został usunęty
+translations.DelegatiotypeEdited: Edycja zakończona sukcesem
+translations.DelegatiotypeAdded: Dodano nowy rodzaj delegacji
+translations.addLogo: Dodaj Logo
+translations.CostTripInView: Suma kosztów
+translations.Shortcut: Skrót
+translations.DelegationTypePermmisionDenied: Akcja niedozwolona, istnieją delegacje z danym rodzajem.
+translations.typeOfExpenditurePermmisionDenied: Akcja niedozwolona, istnieją koszty z danym rodzajem.
+translations.CompanyHasBeenEdited: Dane o firmie zostały zaktualizowane
+translations.CompanyHasBeenDeleted: Firma została usunięta
+translations.CompanyHasBeenAdded: Dodano nową firmę
+translations.typeOfExpenditureCreate: Dodaj nowy rodzaj wydatku
+translations.typeOfExpenditureView: Podgląd rodzaju wydatku
+translations.typeOfExpenditureEdit: Edycja rodzaju wydatku
+translations.UsersView: Podgląd użytkownika

@@ -1,0 +1,27 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.ViewAction'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('type-of-expenditure') }}" class="btn btn-default">{{ 'translations.typeOfExpenditureList'|trans({}, 'DelegationsBundle') }}</a>
+                    <a href="{{ path('type-of-expenditure_edit', {id: entityId}) }}" class="btn btn-default">{{ 'translations.EditAction'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <table class="tables">
+                    <tbody>
+                    {% for en in entity %}
+                        <tr>
+                            <th>{{ 'translations.typeOfExpenditure'|trans({}, 'DelegationsBundle') }} [{{ en.locale }}]: &nbsp;</th>
+                            <td>{{ en.trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div
+{% endblock %}

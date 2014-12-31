@@ -1,0 +1,176 @@
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <p class="help-block">{{ error.message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block form_widget_compound_checkbox %}
+    {% spaceless %}
+        {% for field in form %}
+            <div class="radio pull-left">
+                <label>
+                    {{ form_widget(field) }}
+                    {{ form_label(field) }}
+                </label>
+            </div>
+            <div class=""></div>
+        {% endfor %}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+    {% endspaceless %}
+{% endblock form_widget_compound_checkbox %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <div class="col-md-12">
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_end %}
+    {% spaceless %}
+        {% if not render_rest is defined %}
+            <div class="form-group">
+                {{ form_rest(form) }}
+            </div>
+        {% endif %}
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.tools.validator.localize("{{ app.request.getLocale() }}", {
+                    '*'			: '{{ 'translations.Error'|trans({}, "DelegationsBundle") }}',
+                    ':text'  	: '{{ 'translations.Error.Text'|trans({}, "DelegationsBundle") }}',
+                    ':number' 	: '{{ 'translations.Error.Number'|trans({}, "DelegationsBundle") }}',
+                    ':radio' 	: '{{ 'translations.Error'|trans({}, "DelegationsBundle") }}',
+                    '[max]'	 	: '{{ 'translations.Error.Max'|trans({}, "DelegationsBundle") }} $1',
+                    '[min]'		: '{{ 'translations.Error.Min'|trans({}, "DelegationsBundle") }} $1',
+                    '[required]'	: '{{ 'translations.Error.Required'|trans({}, "DelegationsBundle") }}',
+                    ':datetime'	: '{{ 'translations.Error.Required'|trans({}, "DelegationsBundle") }}'
+                });
+
+                $.tools.validator.addEffect("wall", function(errors, event) {}, function(inputs)  {
+                    $.each(inputs, function(){
+                        $(this).parent().removeClass('has-error');
+                        $(this).parent().find('.help-block').remove();
+                    });
+                });
+                $('#typeofexpenditure_shortcut').unbind('keyup change input paste').bind('keyup change input paste',function(e){
+                    var $this = $(this);
+                    var val = $this.val();
+                    var valLength = val.length;
+                    var maxCount = 4;
+                    if(valLength>maxCount){
+                        $this.val($this.val().substring(0,maxCount));
+                    }
+                });
+
+            });
+
+        </script>
+    {% endspaceless %}
+{% endblock form_end %}
+
+{% block widget_attributes %}
+    {% spaceless %}
+        id="{{ id }}" name="{{ full_name }}"
+        {%- if read_only %} readonly="readonly"{% endif -%}
+        {%- if disabled %} disabled="disabled"{% endif -%}
+        {%- if required %} required="required"{% endif -%}
+        {%- if max_length %} maxlength="{{ max_length }}"{% endif -%}
+        {%- if pattern %} pattern="{{ pattern }}"{% endif -%}
+        {%- for attrname, attrvalue in attr -%}
+            {{- " " -}}
+            {%- if attrname in ['placeholder', 'title'] -%}
+                {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+            {%- elseif attrname in ['class'] -%}
+                {{- "class" }}="{{attrvalue}}"
+            {%- elseif attrvalue is sameas(true) -%}
+                {{- attrname }}="{{ attrname }}"
+            {%- elseif attrvalue is not sameas(false) -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endfor -%}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block form_widget_compound %}
+    {% spaceless %}
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        {{ block('form_rows') }}
+        {{ form_rest(form) }}
+    {% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        <div class="col-xs-4 {% if errors|length > 0 %}has-error{% endif %}">
+            <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options') }}
+            </select>
+        </div>
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block form_label -%}
+    {% if label.label is not sameas(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif %}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif %}
+        {% if label.label is empty -%}
+            {% set label = name|humanize %}
+        {%- else -%}
+            {% set label_locale = label.locale %}
+            {% set label = label.label %}
+        {%- endif -%}
+        <div class="col-md-12">
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }} {{ label_locale }}</label>
+        </div>
+    {%- endif %}
+{%- endblock form_label %}
+
+{% block form_row %}
+    {% spaceless %}
+
+        {% if form.vars.name == 'shortcut' %}
+            <div class="form-group {% if form.vars.errors|length > 0 %}has-error{% endif %}">
+                {{ form_label(form) }}
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+                <div class="clearfix"></div>
+            </div>
+        {% else %}
+            {% for f in form %}
+                <div class="form-group {% if f.vars.errors|length > 0 %}has-error{% endif %}">
+                    {{ form_label(f) }}
+                    {{ form_widget(f) }}
+                    {{ form_errors(f) }}
+                    <div class="clearfix"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_row %}

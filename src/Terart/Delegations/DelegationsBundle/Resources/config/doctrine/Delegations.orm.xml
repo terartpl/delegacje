@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Terart\Delegations\DelegationsBundle\Entity\Delegations" table="delegations">
+        <indexes>
+            <index name="type" columns="type"/>
+            <index name="user_id" columns="user_id"/>
+            <index name="target_country" columns="target_country"/>
+            <index name="target_country_type" columns="target_country_type"/>
+        </indexes>
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="nrDelegation" type="string" column="nr_delegation" length="255" nullable="false"/>
+        <field name="placeACost" type="text" column="place_a_cost" nullable="false"/>
+        <field name="destination" type="text" column="destination" nullable="false"/>
+        <field name="dateFrom" type="datetime" column="date_from" nullable="false"/>
+        <field name="dateTo" type="datetime" column="date_to" nullable="false"/>
+        <field name="purposeOfTrip" type="text" column="purpose_of_trip" nullable="false"/>
+        <field name="isPrivateCar" type="boolean" column="is_private_car" nullable="true"/>
+        <field name="address" type="text" column="address" nullable="false"/>
+        <field name="carNumber" type="string" column="car_number" length="50" nullable="false"/>
+        <field name="engineCapacity" type="integer" column="engine_capacity" precision="10" scale="0" nullable="false"/>
+        <field name="status" type="integer" column="status" nullable="false"/>
+        <field name="created" type="datetime" column="created" nullable="false"/>
+        <field name="advance" type="decimal" column="advance" precision="10" scale="2" nullable="true"/>
+        <many-to-one field="user" target-entity="Users">
+            <join-columns>
+                <join-column name="user_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="type" target-entity="DelegationType">
+            <join-columns>
+                <join-column name="type" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="targetCountryType" target-entity="TargetCountryType">
+            <join-columns>
+                <join-column name="target_country_type" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="targetCountry" target-entity="Countries">
+            <join-columns>
+                <join-column name="target_country" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

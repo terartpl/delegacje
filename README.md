@@ -1,0 +1,1 @@
+Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do systemu SAP

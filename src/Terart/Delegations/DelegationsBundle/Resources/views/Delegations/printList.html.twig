@@ -1,0 +1,91 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ 'translations.DelegationsList'|trans({}, 'DelegationsBundle') }}</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{ 'translations.Id'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Nrdelegation'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Placeacost'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Destination'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Datefrom'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Dateto'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Purposeoftrip'|trans({}, 'DelegationsBundle') }}</th>
+                        {#<th>{{ 'translations.Isprivatecar'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Address'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Carnumber'|trans({}, 'DelegationsBundle') }}</th>
+                        <th>{{ 'translations.Enginecapacity'|trans({}, 'DelegationsBundle') }}</th>#}
+                        <th>{{ 'translations.Status'|trans({}, 'DelegationsBundle') }}</th>
+                        {#<th>{{ 'translations.Created'|trans({}, 'DelegationsBundle') }}</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ entity.nrDelegation }}</td>
+                            <td>{{ entity.placeACost }}</td>
+                            <td>{{ entity.destination }}</td>
+                            <td>{% if entity.dateFrom %}{{ entity.dateFrom|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if entity.dateTo %}{{ entity.dateTo|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ entity.purposeOfTrip }}</td>
+                            {#<td>{% if entity.isPrivateCar %}{{ 'translations.Yes'|trans({}, "DelegationsBundle") }}{% else %}{{ 'translations.No'|trans({}, "DelegationsBundle") }}{% endif %}</td>
+                            <td>{{ entity.address }}</td>
+                            <td>{{ entity.carNumber }}</td>
+                            <td>{% if entity.engineCapacity is not null %}{% if entity.engineCapacity %}{{ 'translations.gte'|trans({}, "DelegationsBundle") }}{% else %}{{ 'translations.lt'|trans({}, "DelegationsBundle") }}{% endif %}{% endif  %}</td>#}
+                            <td>
+                                {% if entity.status == 3 %}
+                                    {{ 'translations.Settled'|trans({}, "DelegationsBundle") }}
+                                {% elseif entity.status == 2 %}
+                                    {{ 'translations.Posted'|trans({}, "DelegationsBundle") }}
+                                {% elseif entity.status == 1 %}
+                                    {{ 'translations.SentSSC'|trans({}, "DelegationsBundle") }}
+                                {% else %}
+                                    {{ 'translations.Added'|trans({}, "DelegationsBundle") }}
+                                {% endif %}
+                            </td>
+                            {#<td>{% if entity.created %}{{ entity.created|date('Y-m-d') }}{% endif %}</td>#}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="modal fade" id="dialogModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">{{ 'translations.Delete'|trans({}, "DelegationsBundle") }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ 'translations.areYouSure'|trans({}, "DelegationsBundle") }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'translations.Close'|trans({}, "DelegationsBundle") }}</button>
+                        <button id="dialogModalAct" type="button" class="btn btn-danger">{{ 'translations.Delete'|trans({}, "DelegationsBundle") }}</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var _url = window.location.href;
+            $('#dialogModalAct').click(function(e){
+                e.preventDefault();
+                window.location.href = _url;
+            });
+            $('.deleteDelegation').click(function(e){
+                e.preventDefault();
+                _url = $(this).attr('href');
+                $('#dialogModal').modal();
+            });
+        });
+    </script>
+    {% endblock %}

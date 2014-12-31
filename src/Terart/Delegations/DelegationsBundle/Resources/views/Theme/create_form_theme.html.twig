@@ -1,0 +1,1280 @@
+{% block form_widget_compound_checkbox %}
+    {% spaceless %}
+        {% for field in form %}
+            <div class="ignore engineCapacity radio pull-left {{ errors|length > 0 ? 'has-error' : '' }}">
+                <label>
+                    {{ form_widget(field) }}
+                    {{ form_label(field) }}
+                </label>
+            </div>
+            <div class=""></div>
+        {% endfor %}
+        {{ form_rest(form) }}
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock form_widget_compound_checkbox %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% if 'input_datetimepicker' in block_prefixes %}
+            <div class="col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+                <div class='input-group date'>
+                    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value|date('Y-m-d') }}" {% endif %}/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% elseif 'input_datepicker' in block_prefixes %}
+            <div class="col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+                <div class='input-group date'>
+                    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value|date('Y-m-d') }}" {% endif %}/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% elseif 'input_timepicker' in block_prefixes %}
+            <div class="col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+                <div class='input-group date'>
+                    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value|date('H:m') }}" {% endif %}/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% else %}
+            <div class="col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+                <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_end %}
+    {% spaceless %}
+        {% if not render_rest is defined %}
+    <div class="form-group">
+        {{ form_rest(form) }}
+    </div>
+{% endif %}
+        </form>
+<script type="text/javascript">
+
+        function modalForm(){
+            $('#modal_form').find('.calc').each(function () {
+                $(this).keyup(function(){
+                    $(this).validator({ lang: '{{ app.request.getLocale() }}', effect: 'wall' });
+                    if($(this).data("validator").checkValidity()){
+                        calculate();
+                    }else {
+                        $('.value').val('');
+                    }
+                });
+            });
+        }
+
+
+        function calculate(){
+            var num = parseFloat(addDots($('.drivenKm').val()) * addDots($('.ratePerKm').val()));
+            if(!isNaN(num)) {
+                $('.value').val(addCommas(num.toFixed(2)));
+            }
+        }
+
+
+
+        function setTargetCountryType() {
+            if($('#delegations_targetCountryType').find(":selected").val() == '2'){
+                $('#targetCountry').removeClass('hidden');
+                $('#delegations_targetCountry').attr('required', true);
+                $('#delegations_targetCountry').attr('disabled', false);
+            }else {
+                $('#targetCountry').addClass('hidden');
+                $('#delegations_targetCountry').attr('required', false);
+                $('#delegations_targetCountry').attr('disabled', true);
+                $("#targetCountry option").filter(function() {
+                    return $(this).val() == '';
+                }).prop('selected', true);
+            }
+        }
+
+        function validateCalc(obj){
+            $(obj).parent().removeClass('has-error');
+            $(obj).validator({ lang: '{{ app.request.getLocale() }}', effect: 'wall' });
+            if($(obj).data("validator").checkValidity()){
+                calculate();
+            }else {
+                $(obj).parent().addClass('has-error');
+                $('.value').val('');
+            }
+        }
+
+        $(document).ready(function() {
+            $('#delegations_targetCountryType').change(function(){
+                setTargetCountryType();
+            });
+            setTargetCountryType();
+            $('#delegations_dateFrom').datetimepicker({
+                pickTime: false,
+                format: "YYYY-MM-DD"
+            }).on("change.dp",function (e) {
+                $('#delegations_dateTo').data("DateTimePicker").setStartDate(e.date);
+            });
+            $('#delegations_dateTo').datetimepicker({
+                pickTime: false,
+                format: "YYYY-MM-DD"
+            }).on("change.dp",function (e) {
+                $('#delegations_dateFrom').data("DateTimePicker").setEndDate(e.date);
+            });
+
+
+            $collectionHolderOther = $('#settlementOtherCollection');
+            $collectionHolder = $('#settlementKmCollection');
+            $.tools.validator.localize("{{ app.request.getLocale() }}", {
+                '*'			: '{{ 'translations.Error'|trans({}, "DelegationsBundle") }}',
+                ':text'  	: '{{ 'translations.Error.Text'|trans({}, "DelegationsBundle") }}',
+                ':number' 	: '{{ 'translations.Error.Number'|trans({}, "DelegationsBundle") }}',
+                ':radio' 	: '{{ 'translations.Error'|trans({}, "DelegationsBundle") }}',
+                '[max]'	 	: '{{ 'translations.Error.Max'|trans({}, "DelegationsBundle") }} $1',
+                '[min]'		: '{{ 'translations.Error.Min'|trans({}, "DelegationsBundle") }} $1',
+                '[required]'	: '{{ 'translations.Error.Required'|trans({}, "DelegationsBundle") }}',
+                ':datetime'	: '{{ 'translations.Error.Required'|trans({}, "DelegationsBundle") }}'
+            });
+
+            $.tools.validator.fn(".calc", function(el, value) {
+                return /\d/.test(value) ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });
+
+            $.tools.validator.fn(".originalAmount", function(el, value) {
+                return /\d/.test(value) ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });
+            $.tools.validator.fn(".conversionAmount", function(el, value) {
+                return /\d/.test(value) ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });
+
+            $.tools.validator.fn(".exchangeRate", function(el, value) {
+                return (/\d/.test(value) || $(el).attr('readonly')) ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });
+
+            $.tools.validator.fn(".typeOfExpenditure", function(el, value) {
+                return (value)  ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });
+
+            /*$.tools.validator.fn('[name*="delegations[engineCapacity]]"', function(el, value) {
+                return (value)  ? true : "{{ 'translations.Error'|trans({}, "DelegationsBundle") }}";
+            });*/
+
+            $.tools.validator.addEffect("wall", function(errors, event) {}, function(inputs)  {
+                $.each(inputs, function(){
+                    $(this).parent().removeClass('has-error');
+                    $(this).parent().find('.help-block').remove();
+                    $(this).parent().parent().find('.help-block').remove();
+                    $(this).parent().parent().removeClass('has-error');
+                });
+                modalForm();
+            });
+
+            $('input[name*="delegations[engineCapacity]"]', '#delegations').change(function(){
+                $('#engineCapacityError').remove();
+            });
+
+            $("#delegations").validator({ lang: '{{ app.request.getLocale() }}', effect: 'wall', ignore: '.ignore' }).submit(function(e){
+                 $('#modal_form').remove();
+                 $('#modal_form_other').remove();
+                if($('#delegations_isPrivateCar').is(':checked')) {
+                    var api = $('input[name*="delegations[engineCapacity]"]:checked', '#delegations').val();
+                    if(api != undefined && api != null){
+                        $('.engineCapacity').removeClass('has-error');
+                        $('#engineCapacityError').remove();
+                    }else {
+                        $('.engineCapacity').addClass('has-error');
+                        var err = '<div id="engineCapacityError" class="has-error"><p class="help-block">{{ 'translations.Error'|trans({}, "DelegationsBundle") }}</p></div>';
+                        $(err).appendTo($('.engineCapacity').parent());
+                        e.preventDefault();
+                        return;
+                    }
+                }
+            }).bind("onFail", function(e, errors)  {
+                $(this).find('p.help-block').remove();
+                $.each(errors, function()  {
+                    var input = this.input;
+                    var messages = this.messages;
+                    if(input.hasClass('dpicker')) {
+                        input.parent().parent().find('.help-block').remove();
+                        input.on("dp.change",function () {
+                            input.parent().closest('.has-error').removeClass('has-error');
+                            input.parent().parent().find('.help-block').remove();
+                        });
+                        input.parent().parent().addClass('has-error');
+                        input.parent().parent().append('<p class="help-block">' + messages[0] + '</p>');
+                    }else {
+                        input.parent().find('.help-block').remove();
+                        input.keyup(function()  {
+                            input.closest('.has-error').removeClass('has-error');
+                            input.parent().find('.help-block').remove();
+                        });
+                        input.change(function()  {
+                            input.closest('.has-error').removeClass('has-error');
+                            input.parent().find('.help-block').remove();
+                        });
+                        input.parent().addClass('has-error');
+                        input.parent().append('<p class="help-block">' + messages[0] + '</p>');
+                    }
+                    modalForm();
+                });
+
+            });
+
+            $('#settlementKmAdd').click(function(e){
+                e.preventDefault();
+                $('#modal_form').remove();
+                $('#settlementKm').find('button#settlementKmAdd').remove();
+                var prototype = $('#settlementKmBody').data('prototype');
+                var newForm = $('<div id="modal_form">' + prototype.replace(/__name__/g, $collectionHolder.find('tr').length) + '</div>');
+                newForm.find('.dpicker').each( function () {
+                    $(this).datetimepicker({
+                        pickTime: false,
+                        format: "YYYY-MM-DD",
+                        startDate: $('#delegations_dateFrom').data("DateTimePicker").getDate(),
+                        endDate: $('#delegations_dateTo').data("DateTimePicker").getDate(),
+                    }).on("click",function () {
+                        $(this).parent().closest('.has-error').removeClass('has-error');
+                        $(this).parent().parent().find('.help-block').remove();
+                    });
+                });
+                newForm.find('.calc').each(function () {
+                    $(this).keyup(function(e){
+                        var code = e.keyCode || e.which;
+                        if (code != '9') {
+                            validateCalc(this);
+                        }
+                    });
+                    $(this).change(function(){
+                        validateCalc(this);
+                    });
+                });
+                newForm.find('.ratePerKm').each(function () {
+                    $(this).change(function(){
+                        $(this).val(addCommas(addDots($(this).val()).toFixed(4)));
+                    });
+                });
+                newForm.find('.ratePerKm').val(addCommas(newForm.find('.ratePerKm').val()));
+                $('#settlementKmBody').append(newForm);
+                $('#settlementKm').modal();
+            });
+
+            $('#settlementKmSubmit').click(function(e){
+                e.preventDefault();
+                $('.calc').change();
+                $('.ratePerKm').change();
+                var inputs = $('#settlementKmBody :input').validator({ lang: '{{ app.request.getLocale() }}', effect: 'wall', ignore: '.ignore'  });
+                var api = inputs.data("validator");
+                if(api.checkValidity()){
+                    var inp =$('#settlementKmBody').find(':input').serializeArray();
+                    var elemTD = '<td>' + parseInt($collectionHolder.find('tr').length + 1) + '</td>';
+                    $.each(inp, function(i, f) {
+                        var i = 0;
+                        name = f.name.replace(/\[.+?\]/g,function (match, pos, original) {
+                            i++;
+                            return (i < 3) ? "" : match;
+                        });
+                        switch(name) {
+                            case 'delegations[from]':
+                                elemTD = elemTD + '<td>' + f.value + '</td>';
+                                var inpInputs = $('#settlementKmBody').find('.settlementKmFrom');
+                                $.each(inpInputs, function(i, f) {
+                                    var _inputTmp = document.createElement('input');
+                                    _inputTmp.type = 'hidden';
+                                    _inputTmp.value = f.value;
+                                    _inputTmp.name = f.name;
+                                    _inputTmp.id = parseInt($collectionHolder.find('tr').length) + '_delegations_from_km';
+                                    $(_inputTmp).appendTo($('#settlementKmCollectionHidden'));
+                                });
+
+                                break;
+                            case 'delegations[to]':
+                                elemTD = elemTD + '<td>' + f.value + '</td>';
+                                var inpInputs = $('#settlementKmBody').find('.settlementKmTo');
+                                $.each(inpInputs, function(i, f) {
+                                    var _inputTmp = document.createElement('input');
+                                    _inputTmp.type = 'hidden';
+                                    _inputTmp.value = f.value;
+                                    _inputTmp.name = f.name;
+                                    _inputTmp.id = parseInt($collectionHolder.find('tr').length) + '_delegations_to_km';
+                                    $(_inputTmp).appendTo($('#settlementKmCollectionHidden'));
+                                });
+                                break;
+                            case 'delegations[dateOfDeparture]':
+                                elemTD = elemTD + '<td>' + '<input type="hidden" name="' + f.name + '" value="' + f.value +'">' + f.value + '</td>';
+                                break;
+                            case 'delegations[drivenKm]':
+                                elemTD = elemTD + '<td>' + '<input type="hidden" name="' + f.name + '" value="' + f.value +'">' + f.value + '</td>';
+                                break;
+                            case 'delegations[drivenKm]':
+                                elemTD = elemTD + '<td>' +
+                                '<input type="hidden" name="' + f.name + '" value="' + f.value +'">' + f.value + '</td>';
+                                break;
+                            case 'delegations[ratePerKm]':
+                                elemTD = elemTD + '<td>' + '<input type="hidden" name="' + f.name + '" value="' + addDots(f.value) +'">' + addCommas(f.value) + '</td>';
+                                break;
+                            case 'delegations[value]':
+                                elemTD = elemTD + '<td>' + '<input type="hidden" name="' + f.name + '" value="' + addDots(f.value) +'">' + addCommas(f.value) + '</td>';
+                                break;
+                            default:
+                                break;
+                        }
+
+                    });
+                    $('#settlementKmBody').find(':input').remove();
+                    var deleteId = 'deleteTRKMAdd' + parseInt($collectionHolder.find('tr').length);
+                    var elem = '<tr>' + elemTD + '<td><a id="' + deleteId + '" href="#' + parseInt($collectionHolder.find('tr').length) + '" class="deleteTRKMAdd">{{ 'translations.Delete'|trans({}, 'DelegationsBundle') }}</a></td>' + '</tr>';
+                    $(elem).appendTo($collectionHolder);
+                    $('#settlementKm').modal('hide');
+                    calculateRegion();
+                    deleteId = '#' + deleteId;
+                    $(deleteId).click(function(e){
+                        e.preventDefault();
+                        $(this).parent().parent().remove();
+                        //reindex content
+                        $.each($collectionHolder.find('tr'), function(i,v){
+                            $($(v).children()[0]).text(i + 1);
+                        });
+                        var hastag = $(this).attr('href');
+                        hastag = hastag.substring(hastag.indexOf('#'));
+                        var idFrom = hastag + '_delegations_from_km';
+                        var idTo = hastag + '_delegations_to_km';
+                        $('#settlementKmCollectionHidden').find(idFrom).remove();
+                        $('#settlementKmCollectionHidden').find(idTo).remove();
+                        calculateRegion();
+                    });
+                }
+
+            });
+
+            var settlementKmEditColl = [];
+            {% if form.vars.value.settlementKm.settlementKm is not empty and form.vars.value.settlementKm.settlementKm.0.dateOfDeparture is defined %}
+    {% for settlementKmGroup in form.vars.value.settlementKm.settlementKm %}
+            settlementKmEditColl.push([
+                '{{ settlementKmGroup.dateOfDeparture.format('Y-m-d')|default('') }}',
+                '{{ settlementKmGroup.from }}',
+                '{{ settlementKmGroup.to }}',
+                '{{ settlementKmGroup.drivenKm }}',
+                '{{ settlementKmGroup.ratePerKm }}',
+                '{{ settlementKmGroup.value }}'
+            ]);
+    {% endfor %}
+{% endif %}
+            function renderSettlementKm(settlement) {
+                $.each(settlement, function(index, elem) {
+                    var indTR = parseInt($collectionHolder.find('tr').length);
+                    var elemTD = '<td>' + (indTR + 1) + '</td>';
+                    elemTD = elemTD
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][dateOfDeparture]" value="' + elem[0] +'">' + elem[0] + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][from]" value="' + elem[1] +'">' + elem[1] + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][to]" value="' + elem[2] +'">' + elem[2] + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][drivenKm]" value="' + elem[3] +'">' + elem[3] + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][ratePerKm]" value="' + addDots(elem[4]) +'">' + addCommas(elem[4]) + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementKm][' + indTR + '][value]" value="' + addDots(elem[5]) +'">' + addCommas(elem[5]) + '</td>';
+
+                    var elem = '<tr>' + elemTD + '<td><a href="#" class="deleteTRKM">{{ 'translations.Delete'|trans({}, 'DelegationsBundle') }}</a></td>' + '</tr>';
+                    $(elem).appendTo($collectionHolder);
+                    calculateRegion();
+                });
+                $('.deleteTRKM').click(function(e){
+                    e.preventDefault();
+                    $(this).parent().parent().remove();
+                    //reindex content
+                    var trs = $collectionHolder.find('tr');
+                    $.each(trs, function(i,v){
+                        $($(v).children()[0]).text(i + 1);
+                    });
+
+                    calculateRegion();
+                });
+            }
+
+            renderSettlementKm(settlementKmEditColl);
+
+            //other cost
+            $('#settlementOtherAdd').click(function(e){
+                e.preventDefault();
+                $('#modal_form_other').remove();
+                $('#settlementOther').find('button#settlementOtherAdd').remove();
+                var prototype = $('#settlementOtherBody').data('prototype');
+                var newForm = $('<div id="modal_form_other">' + prototype.replace(/__name__/g, $collectionHolderOther.find('tr').length) + '</div>');
+                newForm.find('.isExchangeRate').each(function () {
+                    $(this).change(function(e){
+                        e.preventDefault();
+                        if(this.checked) {
+                            newForm.find('.conversionAmount').attr('readonly', true);
+                            newForm.find('.exchangeRate').attr('readonly', false);
+                            newForm.find('.conversionAmount').val('');
+                        }else {
+                            newForm.find('.conversionAmount').attr('readonly', false);
+                            newForm.find('.exchangeRate').attr('readonly', true);
+                            newForm.find('.exchangeRate').val('');
+                            var defaultCurrency = $('#delegations_defaultCurrency').val();
+                            if(defaultCurrency === $('.currency_choice_list').find(':selected').val()) {
+                                newForm.find('.conversionAmount').val(addCommas(addDots(newForm.find('.originalAmount').val()).toFixed(2)));
+                                $('#modal_form_other').find('.conversionAmount').attr('readonly', true);
+                            }
+
+                        }
+                    });
+                });
+                newForm.find('.exchangeRate').each(function () {
+                    $(this).keyup(function(e){
+                        e.preventDefault();
+                        checkExchangeRate(this);
+                    });
+                    $(this).change(function(e){
+                        e.preventDefault();
+                        if(checkExchangeRate(this)) {
+                            $(this).val(addCommas(addDots($(this).val()).toFixed(4)));
+                        }
+                    });
+                });
+
+                function checkExchangeRate(obj) {
+                    $(obj).parent().removeClass('has-error');
+                    if($('#modal_form_other').find('.isExchangeRate').is(':checked')) {
+                        var num = addDots($('#modal_form_other').find('.exchangeRate').val()) * addDots($('#modal_form_other').find('.originalAmount').val());
+                        if(isNaN(num) || !$(obj).val().match('^[0-9]*[,|\.]*?[0-9]*$')) {
+                            $(obj).parent().addClass('has-error');
+                        }else {
+                            $('#modal_form_other').find('.conversionAmount').val(addCommas(num.toFixed(2)));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                }
+
+                newForm.find('.originalAmount').each(function () {
+                    $(this).keyup(function(e){
+                        e.preventDefault();
+                        checkOriginalAmount(this);
+                    });
+                    $(this).change(function(e){
+                        e.preventDefault();
+                        checkOriginalAmount(this);
+                        var num = addDots($(this).val()).toFixed(2);
+                        if(!isNaN(num)) {
+                            $(this).val(addCommas(num));
+                        }
+
+                    });
+                });
+
+                newForm.find('.currency_choice_list').each(function () {
+                    $(this).change(function(e){
+                        e.preventDefault();
+                        checkCurrency(this);
+                    });
+                });
+
+                newForm.find('.conversionAmount').each(function () {
+                    $(this).change(function(e){
+                        e.preventDefault();
+                        $(this).val(addCommas(addDots($(this).val()).toFixed(2)));
+                        $('#modal_form_other').find('.exchangeRate').val(parseFloat(addDots($(this).val()).toFixed(2) / addDots($('#modal_form_other').find('.originalAmount').val()).toFixed(2)).toFixed(4));
+
+                    });
+                });
+
+                function checkCurrency(obj) {
+                    if($('#delegations_defaultCurrency').val() === $(obj).find(':selected').val()) {
+                        $('#modal_form_other').find('.conversionAmount').val(addCommas($('#modal_form_other').find('.originalAmount').val()));
+                        $('#modal_form_other').find('.conversionAmount').attr('readonly', true);
+                        $('#modal_form_other').find('.exchangeRate').attr('readonly', true);
+                        $('#modal_form_other').find('.exchangeRate').val('');
+                        $('#modal_form_other').find('.isExchangeRate').attr('checked', false);
+                        $('#modal_form_other').find('.isExchangeRate').attr('disabled', true);
+                        return;
+                    }
+                    $('#modal_form_other').find('.conversionAmount').val('');
+                    $('#modal_form_other').find('.exchangeRate').val('');
+                    $('#modal_form_other').find('.conversionAmount').prop('readonly', false);
+                    $('#modal_form_other').find('.isExchangeRate').prop('disabled', false);
+                    return;
+                }
+
+                function checkOriginalAmount(obj) {
+                    $(obj).parent().removeClass('has-error');
+                    var _cur = addDots($('#modal_form_other').find('.exchangeRate').val());
+                    if(!_cur){
+                        _cur = 1;
+                    }
+                    var num = addDots($(obj).val()) * _cur;
+                    if(isNaN(num) || !$(obj).val().match('^[0-9]*[\.|,]*?[0-9]*$')) {
+                        $(obj).parent().addClass('has-error');
+                        $('#modal_form_other').find('.conversionAmount').val('');
+                    }else {
+                        var defaultCurrency = $('#delegations_defaultCurrency').val();
+                        if(defaultCurrency === $('.currency_choice_list').find(':selected').val()) {
+                            $('#modal_form_other').find('.conversionAmount').val(addCommas(num.toFixed(2)));
+                            $('#modal_form_other').find('.conversionAmount').attr('readonly', true);
+                        }
+                    }
+                }
+
+                $('#settlementOtherBody').append(newForm);
+                $('#settlementOther').modal();
+            });
+
+            $('#settlementOtherSubmit').click(function(e){
+                e.preventDefault();
+                $('#settlementOtherBody').find('.originalAmount').change();
+                $('#settlementOtherBody').find('.exchangeRate').change();
+
+                var inputs = $('#settlementOtherBody :input').validator({ lang: '{{ app.request.getLocale() }}', effect: 'wall', ignore: '.ignore'  });
+                var api = inputs.data("validator");
+                if(api.checkValidity()){
+                    var inp = $('#settlementOtherBody').find(':input').serializeArray();
+                    var elemTD = '<td>' + parseInt($collectionHolderOther.find('tr').length + 1) + '</td>';
+                    $.each(inp, function(i, f) {
+                        var i = 0;
+                        name = f.name.replace(/\[.+?\]/g,function (match, pos, original) {
+                            i++;
+                            return (i < 3) ? "" : match;
+                        });
+                        switch(name) {
+                            case 'delegations[originalAmount]':
+                                elemTD = elemTD + '<td>' + '<input class="' + name.replace('delegations[', '').replace(']', '') + '" type="hidden" name="' + f.name + '" value="' + addDots(f.value).toFixed(2) + '">' + addCommas(f.value) + '</td>';
+                                //elemTD = elemTD + '<td>' + addCommas(f.value) + '</td>';
+                                break;
+                            case 'delegations[exchangeRate]':
+                                    var exchangeRate = addDots(f.value).toFixed(4);
+                                    if(isNaN(exchangeRate)) {
+                                        exchangeRate = '';
+                                    }
+                                elemTD = elemTD + '<td>' + '<input class="' + name.replace('delegations[', '').replace(']', '') + '" type="hidden" name="' + f.name + '" value="' + exchangeRate + '">' + addCommas(exchangeRate) + '</td>';
+                                //elemTD = elemTD + '<td>' + addCommas(exchangeRate) + '</td>';
+                                break;
+                            case 'delegations[conversionAmount]':
+                                elemTD = elemTD + '<td>' + '<input class="' + name.replace('delegations[', '').replace(']', '') + '" type="hidden" name="' + f.name + '" value="' + addDots(f.value).toFixed(2) + '">' + addCommas(f.value) + '</td>';
+                                //elemTD = elemTD + '<td>' + addCommas(f.value) + '</td>';
+                                break;
+                            case 'delegations[typeOfExpenditure]':
+                                elemTD = elemTD + '<td>' + '<input class="typeOfExpenditure" type="hidden" name="' + f.name + '" value="' + f.value + '"> <span>' + $('select[name=\'' + f.name + '\'] option[value=\'' + f.value + '\']').html() + '</span></td>';
+                                //elemTD = elemTD + '<td><span>' + $('select[name=\'' + f.name + '\'] option[value=\'' + f.value + '\']').html() + '</span></td>';
+                                break;
+                            default:
+                                if(name != 'delegations[isExchangeRate]'){
+                                    if(name == 'delegations[description]'){
+                                        elemTD = elemTD + '<td>' + f.value + '</td>';
+                                        var inpInputs = $('#settlementOtherBody').find('.settlementOtherDescription');
+                                        $.each(inpInputs, function(i, f) {
+                                            var _inputTmp = document.createElement('input');
+                                            _inputTmp.type = 'hidden';
+                                            _inputTmp.value = f.value;
+                                            _inputTmp.name = f.name;
+                                            _inputTmp.id = parseInt($collectionHolderOther.find('tr').length) + '_delegations_description_ot';
+                                            $(_inputTmp).appendTo($('#settlementOtherCollectionHidden'));
+                                        });
+                                    }else {
+                                        elemTD = elemTD + '<td>' + '<input class="' + name.replace('delegations[', '').replace(']', '') + '" type="hidden" name="' + f.name + '" value="' + f.value + '">' + f.value + '</td>';
+                                    }
+
+                                }else {
+                                    var _inputTmp = document.createElement('input');
+                                    _inputTmp.type = 'hidden';
+                                    _inputTmp.value = f.value;
+                                    _inputTmp.name = f.name;
+                                    _inputTmp.id = parseInt($collectionHolderOther.find('tr').length) + '_delegations_ot';
+                                    $(_inputTmp).appendTo($('#settlementOtherCollectionHidden'));
+                                }
+                                break;
+                        }
+                    });
+                    var deleteId = 'deleteTROTAdd' + parseInt($collectionHolderOther.find('tr').length);
+                    var elem = '<tr>' + elemTD + '<td><a id="' + deleteId + '" href="#' + parseInt($collectionHolderOther.find('tr').length) + '" class="deleteTROTAdd">{{ 'translations.Delete'|trans({}, 'DelegationsBundle') }}</a></td>' + '</tr>';
+                    $(elem).appendTo($collectionHolderOther);
+                    deleteId = '#' + deleteId;
+                    $('#settlementOther').modal('hide');
+                    calculateRegionOther();
+                    $(deleteId).click(function(e){
+                        e.preventDefault();
+                        $(this).parent().parent().remove();
+                        //reindex content
+                        var trs = $(this).parent().parent().parent().find('tr');
+                        $.each(trs, function(i,v){
+                            $($(v).children()[0]).text(i + 1);
+                        });
+                        var hastag = $(this).attr('href');
+                        hastag = hastag.substring(hastag.indexOf('#'));
+                        var idDesc = hastag + '_delegations_description_ot';
+                        var idOt = hastag + '_delegations_ot';
+                        $('#settlementOtherCollectionHidden').find(idDesc).remove();
+                        $('#settlementOtherCollectionHidden').find(idOt).remove();
+                        calculateRegionOther();
+                    });
+                    $('#settlementOtherBody').find(':input').remove();
+                }
+
+            });
+//todo
+            var settlementOtEditColl = [];
+            {% if form.vars.value.settlementOther.settlementOfOtherCost is not empty %}
+    {% for settlementOtGroup in form.vars.value.settlementOther.settlementOfOtherCost %}
+            var expenditure = JSON.parse('{{ settlementOtGroup.typeOfExpenditure|raw }}');
+            settlementOtEditColl.push([
+                '{{ settlementOtGroup.originalAmount }}',
+                '{{ settlementOtGroup.currency }}',
+                '{% if settlementOtGroup.exchangeRate %}{{ settlementOtGroup.exchangeRate }}{% endif %}',
+                '{{ settlementOtGroup.conversionAmount }}',
+                [expenditure.id, expenditure.expenditure],
+                '{{ settlementOtGroup.description }}'
+            ]);
+    {% endfor %}
+{% endif %}
+            function renderSettlementOther(settlement) {
+                $.each(settlement, function(index, elem) {
+                    var indTR = parseInt($collectionHolderOther.find('tr').length);
+                    var elemTD = '<td>' + (indTR + 1) + '</td>';
+                    elemTD = elemTD
+                    + '<td>' + '<input type="hidden" name="delegations[settlementOther][' + indTR + '][originalAmount]" value="' + addDots(elem[0]).toFixed(2) +'">' + addCommas(elem[0]) + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementOther][' + indTR + '][currency]" value="' + elem[1] +'">' + elem[1] + '</td>';
+                    if(elem[2] == '') {
+                        elemTD = elemTD + '<td>' + '<input type="hidden" name="delegations[settlementOther][' + indTR + '][exchangeRate]" value=""></td>';
+                    }else {
+                        elemTD = elemTD + '<td>' + '<input type="hidden" name="delegations[settlementOther][' + indTR + '][exchangeRate]" value="' + addDots(elem[2]).toFixed(4) +'">' + addCommas(elem[2]) + '</td>';
+                    }
+                    elemTD = elemTD + '<td>' + '<input type="hidden" class="conversionAmount" name="delegations[settlementOther][' + indTR + '][conversionAmount]" value="' + addDots(elem[3]).toFixed(2) +'">' + addCommas(addDots(elem[3]).toFixed(2)) + '</td>'
+                    + '<td>' + '<input type="hidden" class="typeOfExpenditure" name="delegations[settlementOther][' + indTR + '][typeOfExpenditure]" value="' + elem[4][0] +'">' + elem[4][1] + '</td>'
+                    + '<td>' + '<input type="hidden" name="delegations[settlementOther][' + indTR + '][description]" value="' + elem[5] +'">' + elem[5] + '</td>';
+
+                    var elem = '<tr>' + elemTD + '<td><a href="#" class="deleteTROT">{{ 'translations.Delete'|trans({}, 'DelegationsBundle') }}</a></td>' + '</tr>';
+                    $(elem).appendTo($collectionHolderOther);
+                    calculateRegionOther();
+                });
+                $('.deleteTROT').click(function(e){
+                    e.preventDefault();
+                    $(this).parent().parent().remove();
+                    //reindex content
+                    var trs = $(this).parent().parent().parent().find('tr');
+                    $.each(trs, function(i,v){
+                        $($(v).children()[0]).text(i + 1);
+                    });
+                    calculateRegionOther();
+                });
+            }
+
+            renderSettlementOther(settlementOtEditColl);
+
+
+            $('#delegations_isPrivateCar').change(function(){
+                isPrivateCar(this);
+            });
+
+            isPrivateCar('#delegations_isPrivateCar');
+        });
+
+        function isPrivateCar(elem) {
+            if($(elem).is(':checked')) {
+                $('#delegations_address_contener').removeClass('hidden');
+                $('#delegations_address').removeClass('ignore');
+                $('#delegations_address').attr('required', true);
+                $('#delegations_carNumber_contener').removeClass('hidden');
+                $('#delegations_carNumber').removeClass('ignore');
+                $('#delegations_carNumber').attr('required', true);
+                $('#delegations_settlementKm_contener').removeClass('hidden');
+                $('#delegations_settlementKm').removeClass('ignore');
+                $('#delegations_settlementKm').attr('required', true);
+                $('#delegations_engineCapacity_contener').removeClass('hidden');
+                $('.engineCapacity').removeClass('ignore');
+                $('.engineCapacity').find('input').addClass('required');
+                $('.engineCapacity').attr('required', true);
+            }else {
+                $('#delegations_address_contener').addClass('hidden');
+                $('#delegations_address').addClass('ignore');
+                $('#delegations_address').attr('required', false);
+                $('#delegations_carNumber_contener').addClass('hidden');
+                $('#delegations_carNumber').addClass('ignore');
+                $('#delegations_carNumber').attr('required', false);
+                $('#delegations_settlementKm_contener').addClass('hidden');
+                $('#delegations_settlementKm').addClass('ignore');
+                $('#delegations_settlementKm').attr('required', false);
+                $('#delegations_engineCapacity_contener').addClass('hidden');
+                $('.engineCapacity').addClass('ignore');
+                $('.engineCapacity').attr('required', false);
+                $('.engineCapacity').find('input').removeClass('required');
+            }
+        }
+
+        function calculateRegion(){
+            var _count = $collectionHolder.find('tr').length;
+            if(_count == 0) {
+                $('#settlementKmCollSum').addClass('hidden');
+                return;
+            }
+            var drivenKmSum = 0;
+            var drivenKmValue = 0;
+            var collection = $collectionHolder.find('tr');
+            $.each(collection, function(i,v){
+                drivenKmSum += parseInt($($($(v).children()[4]).find(':input')[0]).val());
+                drivenKmValue += parseFloat(addDots($($($(v).children()[6]).find(':input')[0]).val()));
+            });
+            $('#DrivenKmSum').html(drivenKmSum);
+            $('#DrivenKmValue').html(addCommas(drivenKmValue.toFixed(2)));
+            $('#settlementKmCollSum').removeClass('hidden');
+            calculateRegionOther();
+        }
+
+        function calculateRegionOther() {
+            $collectionHolderOther = $('#settlementOtherCollection');
+            var inputs = $collectionHolderOther.find('tr');
+            $('.costType').html("0,00");
+            var sum = 0;
+            $.each(inputs, function(i,v){
+                var ind = '#costType' + $(v).find('.typeOfExpenditure').val();
+                var num = parseFloat(addDots($(ind).html())) + parseFloat(addDots($(v).find('.conversionAmount').val()));
+                $(ind).html(addCommas(num.toFixed(2)));
+            });
+
+            var cartravel = addDots($('#DrivenKmValue').html());
+            if(isNaN(cartravel)){
+                cartravel = parseFloat(0);
+            }
+            $('#totalTravelExpenses').html(addCommas(cartravel.toFixed(2)));
+            var inputs = $('.costType');
+            $.each(inputs, function(i,v){
+                sum += addDots($(v).html());
+            });
+            $('#thetotalCostTrip').html(addCommas(parseFloat(sum).toFixed(2)));
+            subtraction();
+
+        }
+        calculateRegionOther();
+        $('#delegations_advance').change(function(){
+            subtraction();
+        }).focus(function(){
+            $(this).val('');
+        }).blur(function(){
+            if($(this).val() == ''){
+                $(this).val('0,00');
+            }
+
+        });
+
+        function subtraction() {
+            var subtraction = addDots($('#delegations_advance').val()).toFixed(2) - addDots($('#thetotalCostTrip').html()).toFixed(2);
+            if(subtraction > 0) {
+                $('#amountRecovered').html(addCommas(parseFloat(subtraction.toString()).toFixed(2)));
+                $('#amountPaid').html("0,00");
+                $('#delegations_advance').val(addCommas(addDots($('#delegations_advance').val()).toFixed(2)));
+            }else {
+                $('#amountRecovered').html("0,00");
+                $('#amountPaid').html(addCommas(parseFloat(Math.abs(subtraction).toString()).toFixed(2)));
+            }
+            $('#delegations_advance').val(addCommas(addDots($('#delegations_advance').val()).toFixed(2)));
+        }
+</script>
+
+    {% endspaceless %}
+{% endblock form_end %}
+
+{% block widget_attributes %}
+
+    {% spaceless %}
+        id="{{ id }}" name="{{ full_name }}"
+        {%- if read_only %} readonly="readonly"{% endif -%}
+        {%- if disabled %} disabled="disabled"{% endif -%}
+        {%- if required %} required="required"{% endif -%}
+        {%- if max_length %} maxlength="{{ max_length }}"{% endif -%}
+        {%- if pattern %} pattern="{{ pattern }}"{% endif -%}
+        {%- for attrname, attrvalue in attr -%}
+            {{- " " -}}
+            {%- if attrname in ['placeholder', 'title'] -%}
+                {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+            {%- elseif attrname in ['class'] -%}
+                {{- "class" }}="{{attrvalue}}"
+            {%- elseif attrvalue is sameas(true) -%}
+                {{- attrname }}="{{ attrname }}"
+            {%- elseif attrvalue is not sameas(false) -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endfor -%}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block form_widget_compound %}
+    {% spaceless %}
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        {{ block('form_rows') }}
+        {{ form_rest(form) }}
+    {% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        <div class="col-xs-4 {{ errors|length > 0 ? 'has-error' : '' }}">
+            <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options') }}
+            </select>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block form_label -%}
+    {% if label is not sameas(false) -%}
+        {% if not compound -%}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{%- endif %}
+        {% if required -%}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{%- endif %}
+        {% if label is empty -%}
+    {% set label = name|humanize %}
+{%- endif -%}
+        {% if label == 'translations.isExchangeRate' %}
+            &nbsp;&nbsp;&nbsp;&nbsp;<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {% else %}
+    <div class="col-md-12">
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    </div>
+{% endif %}
+    {%- endif %}
+{%- endblock form_label %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+            <div class="clearfix"></div>
+        </div>
+
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block _delegations_address_row %}
+    {% spaceless %}
+        <div id="delegations_address_contener" class="form-group hidden {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+            <div class="clearfix"></div>
+        </div>
+
+    {% endspaceless %}
+{% endblock _delegations_address_row %}
+
+{% block _delegations_carNumber_row %}
+    {% spaceless %}
+        <div id="delegations_carNumber_contener" class="form-group hidden {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+            <div class="clearfix"></div>
+        </div>
+
+    {% endspaceless %}
+{% endblock _delegations_carNumber_row %}
+
+{% block _delegations_isPrivateCar_row %}
+    {% spaceless %}
+        <div class="clearfix"></div>
+        <div class="form-group col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+        </div>
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock _delegations_isPrivateCar_row %}
+
+{% block _delegations_isPrivateCar_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) -%}
+            {% if not compound -%}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{%- endif %}
+            {% if required -%}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{%- endif %}
+            {% if label is empty -%}
+    {% set label = name|humanize %}
+{%- endif -%}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {%- endif %}
+    {% endspaceless %}
+{% endblock _delegations_isPrivateCar_label %}
+
+{% block _delegations_engineCapacity_row %}
+    {% spaceless %}
+        <div id="delegations_engineCapacity_contener" class="hidden">
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                {{ form_label(form) }}
+            </div>
+            <div class="form-group col-md-12 {{ errors|length > 0 ? 'has-error' : '' }}">
+                {{ form_widget(form) }}{{ form_errors(form) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock _delegations_engineCapacity_row %}
+
+{% block _delegations_engineCapacity_widget %}
+    {% spaceless %}
+        {{  block('form_widget_compound_checkbox') }}
+    {% endspaceless %}
+{% endblock _delegations_engineCapacity_widget %}
+
+
+{% block _delegations_engineCapacity_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) -%}
+            {% if not compound -%}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{%- endif %}
+            {% if required -%}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{%- endif %}
+            {% if label is empty -%}
+    {% set label = name|humanize %}
+{%- endif -%}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {%- endif %}
+    {% endspaceless %}
+{% endblock _delegations_engineCapacity_label %}
+
+{% block _delegations_settlementKm_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) -%}
+            {% if not compound -%}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{%- endif %}
+            {% if required -%}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{%- endif %}
+            {% if label is empty -%}
+    {% set label = name|humanize %}
+{%- endif -%}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+            <button id="settlementKmAdd" class="btn btn-default pull-right">{{ 'translations.Add'|trans({}, "DelegationsBundle") }}</button>
+        {%- endif %}
+    {% endspaceless %}
+{% endblock _delegations_settlementKm_label %}
+
+
+{% block _delegations_settlementKm_row %}
+    {% spaceless %}
+        <div class="clearfix"></div>
+        <div id="delegations_settlementKm_contener" class="form-group col-md-12 hidden">
+            {{ form_label(form) }}
+            <div class="clearfix"></div>
+            <div class="modal fade" id="settlementKm">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'translations.Close'|trans({}, 'DelegationsBundle') }}</span></button>
+                            <h4 class="modal-title">{{ form_label(form) }}</h4>
+                        </div>
+                        <div class="modal-body" id="settlementKmBody" data-prototype="{{ form_widget(form.vars.prototype, {'attr': {'disabled': true}})|e }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'translations.Close'|trans({}, 'DelegationsBundle') }}</button>
+                            <button type="button" id="settlementKmSubmit" class="btn btn-primary">{{ 'translations.Save'|trans({}, 'DelegationsBundle') }}</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>{{ 'translations.DepartureDate'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.From'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.To'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.DrivenKm'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.RatePerKm'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Value'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Actions'|trans({}, 'DelegationsBundle') }}</th>
+                </tr>
+                </thead>
+                <tbody id="settlementKmCollection">
+                </tbody>
+                <tbody id="settlementKmCollSum" class="hidden">
+                <th colspan="4">
+                    <span class="pull-right">{{ 'translations.Sum'|trans({}, 'DelegationsBundle') }}:</span>
+                </th>
+                <th id="DrivenKmSum"></th>
+                <th ></th>
+                <th id="DrivenKmValue"></th>
+                <th ></th>
+                </tbody>
+            </table>
+            <div id="settlementKmCollectionHidden"></div>
+        </div>
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock _delegations_settlementKm_row %}
+
+{% block _delegations_settlementOther_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) -%}
+            {% if not compound -%}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{%- endif %}
+            {% if required -%}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{%- endif %}
+            {% if label is empty -%}
+    {% set label = name|humanize %}
+{%- endif -%}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+            <button id="settlementOtherAdd" class="btn btn-default pull-right">{{ 'translations.Add'|trans({}, "DelegationsBundle") }}</button>
+        {%- endif %}
+    {% endspaceless %}
+{% endblock _delegations_settlementOther_label %}
+
+
+{% block _delegations_settlementOther_row %}
+    {% spaceless %}
+        <div class="clearfix"></div>
+        <div class="form-group col-md-12">
+            {{ form_label(form) }}
+            <div class="clearfix"></div>
+            <div class="modal fade" id="settlementOther">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'translations.Close'|trans({}, 'DelegationsBundle') }}</span></button>
+                            <h4 class="modal-title">{{ form_label(form) }}</h4>
+                        </div>
+                        <div class="modal-body" id="settlementOtherBody" data-prototype="{{ form_widget(form.vars.prototype, {'attr': {'disabled': true}})|e }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'translations.Close'|trans({}, 'DelegationsBundle') }}</button>
+                            <button type="button" id="settlementOtherSubmit" class="btn btn-primary">{{ 'translations.Save'|trans({}, 'DelegationsBundle') }}</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>{{ 'translations.Amount'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Currency'|trans({}, 'DelegationsBundle') }}</th>
+                    {#<th>{{ 'translations.RateOfExchange'|trans({}, 'DelegationsBundle') }}</th>#}
+                    <th>{{ 'translations.Converter'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Amount'|trans({}, 'DelegationsBundle') }} PLN</th>
+                    <th>{{ 'translations.TypeOfExpenditure'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Description'|trans({}, 'DelegationsBundle') }}</th>
+                    <th>{{ 'translations.Actions'|trans({}, 'DelegationsBundle') }}</th>
+                </tr>
+                </thead>
+                <tbody id="settlementOtherCollection"></tbody>
+            </table>
+            <div id="settlementOtherCollectionHidden"></div>
+        </div>
+        <div class="clearfix"></div>
+        <h4>{{ "translations.SettlementAll"|trans({}, "DelegationsBundle") }}</h4>
+        <div class="table-responsive col-md-6 nopadding-left">
+            <table class="table table-no-border" id="costTripInView">
+                <tbody>
+                <tr>
+                    <td class="nopadding-top-bottom">{{ 'translations.CostTripInView'|trans({}, "DelegationsBundle") }} - {{ 'translations.SettlementKm'|trans({}, "DelegationsBundle")|lower }}:</td>
+                    <td class="nopadding-top-bottom"><p id="totalTravelExpenses" class="text-right costType">0.0</p></td>
+                </tr>
+                {% for key, costType in form.vars.prototype.vars.costsType %}
+                    <tr>
+                        <td class="nopadding-top-bottom">{{ 'translations.CostTripInView'|trans({}, "DelegationsBundle") }} - {{ costType|lower }}: </td>
+                        <td class="nopadding-top-bottom"><p id="costType{{ key }}" class="text-right costType">0.0</p></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <table class="table table-striped">
+                <tr>
+                    <th class="nopadding-top-bottom">{{ 'translations.ThetotalCostTrip'|trans({}, "DelegationsBundle") }}:</th>
+                    <th class="nopadding-top-bottom"><p id="thetotalCostTrip" class="text-right">0.0</p></th>
+                </tr>
+            </table>
+        </div><div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock _delegations_settlementOther_row %}
+
+{% block _delegations_targetCountryType_row %}
+    {% spaceless %}
+<div class="form-group {{ errors|length > 0 ? 'has-error' : '' }}">
+    {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+
+    {% endspaceless %}
+    {% endblock _delegations_targetCountryType_row %}
+
+    {% block _delegations_targetCountry_row %}
+    {% spaceless %}
+    <div id="targetCountry" class="form-group hidden {{ errors|length > 0 ? 'has-error' : '' }}">
+        {{ form_label(form) }}{{ form_widget(form) }}{{ form_errors(form) }}
+    </div>
+    <div class="clearfix"></div>
+</div>
+    {% endspaceless %}
+{% endblock _delegations_targetCountry_row %}
+
+{% block _delegations_targetCountry_widget %}
+    {% spaceless %}
+        {{ block('choice_widget_collapsed_country') }}
+    {% endspaceless %}
+{% endblock _delegations_targetCountry_widget %}
+
+
+{% block _delegations_user_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock _delegations_user_row %}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="has-error col-md-12">
+            <span class="help-block">
+                    {% for error in errors %}
+                        {{
+                        error.messagePluralization is null
+                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                        }}
+                    {% endfor %}
+            </span>
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+{% block _delegations_advance_row %}
+    {% spaceless %}
+        <div class="form-group {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}{{ form_errors(form) }}
+            <div class="clearfix"></div>
+            <div class="col-md-6 nopadding-left">
+                <table class="table table-striped">
+                    <tr>
+                        <th class="nopadding-top-bottom">{{ 'translations.AmountRecovered'|trans({}, "DelegationsBundle") }}:</th>
+                        <th class="nopadding-top-bottom"><p id="amountRecovered" class="text-right">0.0</p></th>
+                    </tr>
+                    <tr>
+                        <th class="nopadding-top-bottom">{{ 'translations.AmountPaid'|trans({}, "DelegationsBundle") }}:</th>
+                        <th class="nopadding-top-bottom"><p id="amountPaid" class="text-right">0.0</p></th>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock _delegations_advance_row %}
+{% block _delegations_advance_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) -%}
+            {% if not compound -%}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {%- endif %}
+            {% if required -%}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {%- endif %}
+            {% if label is empty -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+            <div class="col-md-4 padding-8">
+                <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+            </div>
+        {%- endif %}
+    {% endspaceless %}
+{% endblock _delegations_advance_label %}
+{% block _delegations_advance_widget %}
+    {% spaceless %}
+        {{ block('form_widget_simple_input') }}
+    {% endspaceless %}
+{% endblock _delegations_advance_widget %}
+
+{% block form_widget_simple_input %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <div class="col-md-2">
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value|number_format(2, ',', '') }}" {% else %}value="{{ 0|number_format(2, ',', '') }}"{% endif %}/>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock form_widget_simple_input %}
+
+{% block choice_widget_options_country %}
+    {% spaceless %}
+        {% for group_label, choice in options %}
+            {% if choice is iterable %}
+                <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                    {% set options = choice %}
+                    {{ block('choice_widget_options') }}
+                </optgroup>
+            {% else %}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                    {% set _label = "translations." ~ choice.label %}
+                    {{ _label|trans({}, translation_domain) }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_options_country %}
+
+{% block choice_widget_collapsed_country %}
+    {% spaceless %}
+        <div class="col-xs-4 {{ errors|length > 0 ? 'has-error' : '' }}">
+            <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options_country') }}
+            </select>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed_country %}
+
+{% block choice_widget_collapsed_delegation_type %}
+    {% spaceless %}
+        <div class="col-xs-4 {{ errors|length > 0 ? 'has-error' : '' }}">
+            <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options_delegation_type') }}
+            </select>
+            <div class="clearfix"></div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed_delegation_type %}

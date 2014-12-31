@@ -1,0 +1,57 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.ViewAction'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('users') }}" class="btn btn-default">{{ 'translations.UsersList'|trans({}, 'DelegationsBundle') }}</a>
+                    <a href="{{ path('users_edit', {id: entity.id}) }}" class="btn btn-default">{{ 'translations.EditAction'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <table class="tables">
+                    <tbody>
+                    <tr>
+                        <th>{{ 'translations.Id'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Name'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Surname'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.surname }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Company'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.company.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Username'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Email'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Isadmin'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{% if entity.isAdmin %}{{ 'translations.Yes'|trans({}, 'DelegationsBundle') }}{% else %}{{ 'translations.No'|trans({}, 'DelegationsBundle') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'translations.Created'|trans({}, 'DelegationsBundle') }}: &nbsp;</th>
+                        <td>{{ entity.created|date('Y-m-d') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {#<div class="panel-footer">
+                {% form_theme delete_form 'delete_form_theme.html.twig' %}
+                {{ form(delete_form) }}
+            </div>#}
+        </div>
+    </div>
+{% endblock %}

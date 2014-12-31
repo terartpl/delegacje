@@ -1,0 +1,26 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+
+{% block body -%}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'translations.ViewAction'|trans({}, 'DelegationsBundle') }}
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ path('delegations') }}" class="btn btn-default hidden-print">{{ 'translations.DelegationsList'|trans({}, 'DelegationsBundle') }}</a>
+                    {% if entity.status <= 1 %}
+                    <a href="{{ path('delegations_edit', { 'id': entity.id }) }}" class="btn btn-default hidden-print">{{ 'translations.EditDelegation'|trans({}, 'DelegationsBundle') }}</a>
+                    {% endif %}
+                    <a class="btn btn-default btn-print hidden-print" href="{{ path('delegations_print', { 'id': entity.id }) }}">{{ 'translations.PrintAction'|trans({}, 'DelegationsBundle') }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body table-responsive">
+                {% include 'DelegationsBundle:Delegations:view.html.twig' %}
+            </div>
+            {#<div class="panel-footer">
+                {% form_theme delete_form 'delete_form_theme.html.twig' %}
+                {{ form(delete_form) }}
+            </div>#}
+        </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,138 @@
+translations.Login: "Login"
+translations.PleaseLogIn: "Login"
+translations.Password: "Password"
+translations.DelegationsList: "Delegations list"
+translations.CreateNewEntry: "Create a new delegation"
+translations.Nrdelegation: "Delegation number"
+translations.Placeacost: "Place of the cost"
+translations.Destination: "Destination"
+translations.Datefrom: "Date from"
+translations.Dateto: "Date to"
+translations.Purposeoftrip: "Purpose of the trip"
+translations.Isprivatecar: "Is private car"
+translations.Address: "Address"
+translations.Carnumber: "Car number"
+translations.Enginecapacity: "Engine capacity"
+translations.Issaved: "Is saved"
+translations.Created: "Created"
+translations.Id: "Id"
+translations.Actions: "Actions"
+translations.ChooseOption: "Choose an option"
+translations.Back: "Back"
+translations.TypeDelegation: "Type of delegation"
+translations.Save: "Save"
+translations.SettlementKm: "Settlement [km]"
+translations.DepartureDate: "Departure date"
+translations.From: "From"
+translations.To: "To"
+translations.DrivenKm: "Driven [km]"
+translations.RatePerKm: "Rate per km"
+translations.Value: "Value"
+translations.Close: "Close"
+translations.Add: "Add new"
+translations.Sum: "Sum"
+translations.SettlementOther: "Settlement [other]"
+translations.Amount: "Amount"
+translations.Currency: "Currency"
+translations.RateOfExchange: "Rate of exchange"
+translations.Converter: "Converter"
+translations.TypeOfExpenditure: "Type of expenditure"
+translations.Description: "Description"
+translations.isExchangeRate: "Exchange ?"
+translations.typeOfExpenditure: "Type of expenditure"
+translations.conversionAmount: "Conversion amount"
+translations.Yes: "Yes"
+translations.No: "No"
+translations.Username: "Username"
+translations.Name: "Name"
+translations.Surname: "Surname"
+translations.Company: "Company"
+translations.TotalTravelExpenses: "Total travel expenses"
+translations.TotalCostAccommodation: "Total cost of accommodation"
+translations.TotalCostMeals: "Total cost of meals"
+translations.TotalCostRepresentation: "Total cost of representation"
+translations.TheSumOtherExpenses: "The sum of the other expenses"
+translations.ThetotalCostTrip: "The total cost of the trip"
+translations.Delete: "Delete"
+translations.Logout: "Logout"
+translations.exportedFile: "The file was exported"
+translations.ViewAction: "View"
+translations.EditAction: "Edit"
+translations.ExportAction: "Export"
+translations.DelegationNotFounded: "The delegation was not found"
+translations.PrintAction: "Print"
+translations.permissionDenied: "Permission Denied"
+translations.UsersList: "Users list"
+translations.CreateNewUser: "Add user"
+translations.Isadmin: "Is admin?"
+translations.RepeatPassword: "Repeat password"
+translations.Admin: "Admin panel"
+translations.ResetAction: "Reset password"
+translations.passwdChanged: "Password has been changed"
+translations.userNotExist: "User does not exist"
+translations.userHasDelegations: "You can not delete a user, because it has delegations"
+translations.userHasOwn: "You can not delete your User"
+translations.areYouSure: "Are you sure?"
+translations.translations.Confirm: "Confirm"
+translations.DelegationDeleted: "Delegation has been deleted"
+translations.logInAs: "Logged in as"
+translations.lt: "Less than 2.0"
+translations.gte: "Greater or equal than 2.0"
+translations.SettlementAll: "Summary of the costs"
+translations.ViewDelegation: "Delegation edit"
+translations.EditDelegation: "Delegation view"
+translations.ltCanonical: lt_2
+translations.gteCanonical: gte_2
+translations.Status: "Status"
+translations.Added: "Added"
+translations.SentSSC: "Sent - SSC"
+translations.Posted: "Posted"
+translations.Settled: "Settled"
+translations.DelegationAdded: "Delegation has been added"
+translations.alphaNumericErrMsg: "The given string contains an illegal character: it can only contain letters or numbers"
+translations.ChangeSaved: "Change has been saved"
+translations.ChangeLanguage: "Change language"
+translations.pl: "Polish"
+translations.en: "English"
+translations.Advance: "Advance"
+translations.AmountRecovered: "Amount to be recovered"
+translations.AmountPaid: "Amount to be paid"
+translations.Email: "Email"
+translations.CompanyList: "List of companies"
+translations.Street: "Street"
+translations.HouseNumber: "House number"
+translations.ZipCode: "Zip code"
+translations.Locality: "Locality"
+translations.Country: "Country"
+translations.Nip: "Nip"
+translations.CreateNewCompany: "Create a new company"
+translations.CompanyNotExist: "Company does not exist"
+translations.userHasCompany: "You can not delete a company, because it belongs to users"
+translations.DelegationTypeList: "Delegation type list"
+translations.CreateNewDelegationType: "Create a new delegation type"
+translations.DelegatiotypeName: "Name"
+translations.DelegatiotypeView: "Delegation type view"
+translations.DelegatiotypeEdit: Delegation type edit
+translations.AddDelegationType: Add delegation type
+translations.DelegationTypeNotExist: Unable to find delegation type
+translations.typeOfExpenditureList: Expenditure type list
+translations.CreateNewexpenditure: Add a new type of expenditure
+translations.typeOfExpenditureNotFound: Not found type of expenditure
+translations.typeOfExpenditureDeleted: Entity has been deleted
+translations.typeOfExpenditureEdited: Entity has been saved
+translations.typeOfExpenditureAdded: Entity has been added
+translations.DelegatiotypeDeleted: Entity has been deleted
+translations.DelegatiotypeEdited: Entity has been saved
+translations.DelegatiotypeAdded: Entity has been added
+translations.addLogo: Add Logo
+translations.CostTripInView: Sum of costs
+translations.Shortcut: Shortcut
+translations.DelegationTypePermmisionDenied: Action not allowed, there are delegations of this delegation type
+translations.typeOfExpenditurePermmisionDenied: Action not allowed, there are delegations of this expenditure type
+translations.CompanyHasBeenEdited: The Company has been updated
+translations.CompanyHasBeenDeleted: The Company has been deleted
+translations.CompanyHasBeenAdded: The Company has been added
+translations.typeOfExpenditureCreate: Add new type of expenditure
+translations.typeOfExpenditureView: Preview - type of expenditure
+translations.typeOfExpenditureEdit: Edit the type of expenditure
+translations.UsersView: User preview

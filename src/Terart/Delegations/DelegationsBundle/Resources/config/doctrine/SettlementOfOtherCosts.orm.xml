@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Terart\Delegations\DelegationsBundle\Entity\SettlementOfOtherCosts" table="settlement_of_other_costs">
+        <indexes>
+            <index name="type_of_expenditure_id" columns="type_of_expenditure_id"/>
+        </indexes>
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="originalAmount" type="decimal" column="original_amount" precision="10" scale="2" nullable="false"/>
+        <field name="currency" type="string" column="currency" length="3" nullable="false"/>
+        <field name="isExchangeRate" type="boolean" column="is_exchange_rate" nullable="false"/>
+        <field name="exchangeRate" type="decimal" column="exchange_rate" precision="10" scale="4" nullable="false"/>
+        <field name="conversionAmount" type="decimal" column="conversion_amount" precision="10" scale="2"
+               nullable="false"/>
+        <field name="description" type="text" column="description" nullable="false"/>
+        <many-to-one field="typeOfExpenditure" target-entity="TypeOfExpenditure">
+            <join-columns>
+                <join-column name="type_of_expenditure_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

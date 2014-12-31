@@ -1,0 +1,34 @@
+Terart\Delegations\DelegationsBundle\Entity\Users:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+
+Terart\Delegations\DelegationsBundle\Entity\Delegations:
+    properties:
+        nrDelegation:
+           - NotBlank: ~
+           - Length:
+               min: 3
+               max: 255
+           - Terart\Delegations\DelegationsBundle\Validator\Constraints\ContainsAlphanumeric: ~
+        placeACost:
+            - NotBlank: ~
+        destination:
+            - NotBlank: ~
+        purposeOfTrip:
+            - NotBlank: ~
+    constraints:
+        - Terart\Delegations\DelegationsBundle\Validator\Constraints\Delegation: ~
+
+Terart\Delegations\DelegationsBundle\Entity\TypeOfExpenditure:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: shortcut
+    properties:
+        shortcut:
+            - Terart\Delegations\DelegationsBundle\Validator\Constraints\ContainsAlphanumeric: ~
+
+Terart\Delegations\DelegationsBundle\Entity\DelegationType:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+             fields: [trans, locale]
+             errorPath: trans

@@ -1,0 +1,52 @@
+{% extends 'DelegationsBundle::base.html.twig' %}
+{#{% set title %}#}
+{% block body %}
+    {% form_theme form 'DelegationsBundle:Theme:create_user_form_theme.html.twig' %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-md-2">
+            <style>
+                #form_logo
+                {
+                    border: none;
+                }
+
+                .help-block
+                {
+                    color: red;
+                }
+                 .move-down-sm
+                 {
+                     margin-top:30px;
+                 }
+
+                 .move-down
+                 {
+                     margin-top:50px;
+                 }
+
+            </style>
+            {{ form_row(form.logo) }}
+        </div>
+        <div class="col-md-8">
+            {#{{ form_widget(form.save) }}#}
+            <div class="move-down-sm">
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+    </div>
+
+    {% if img is defined and img != null %}
+
+        <div class="row move-down">
+        <div class="col-md-2">
+            <img src="/logo/default_logo.png" alt="Logo" class="">
+        </div>
+        <div class="col-md-6">
+            {{ form_widget(form.delete) }}
+        </div>
+        </div>
+    {% endif %}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Terart\Delegations\DelegationsBundle\Entity\SettlementKm" table="settlement_km">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="dateOfDeparture" type="datetime" column="date_of_departure" nullable="false"/>
+        <field name="from" type="string" column="_from" length="255" nullable="false"/>
+        <field name="to" type="string" column="_to" length="255" nullable="false"/>
+        <field name="drivenKm" type="integer" column="driven_km" nullable="false"/>
+        <field name="ratePerKm" type="decimal" column="rate_per_km" precision="10" scale="4" nullable="false"/>
+        <field name="value" type="decimal" column="value" precision="10" scale="2" nullable="false"/>
+    </entity>
+</doctrine-mapping>

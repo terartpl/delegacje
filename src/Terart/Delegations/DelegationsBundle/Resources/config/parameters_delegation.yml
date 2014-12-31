@@ -1,0 +1,6 @@
+parameters:
+    filepath: /var/www/delegacje/delegationFiles
+    default_currency: PLN
+    export_to_sap: true
+    default_country: PL
+    locale_list: [pl, en]

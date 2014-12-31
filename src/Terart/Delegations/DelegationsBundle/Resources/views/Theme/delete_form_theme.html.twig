@@ -1,0 +1,49 @@
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('submit') %}
+        <input type="{{ type }}" class="btn btn-danger" value="{{ "translations.Delete"|trans({}, "DelegationsBundle") }}" />
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_end %}
+    {% spaceless %}
+        {% if not render_rest is defined %}
+            {{ form_rest(form) }}
+        {% endif %}
+        </form>
+    {% endspaceless %}
+{% endblock form_end %}
+
+{% block widget_attributes %}
+    {% spaceless %}
+        id="{{ id }}" name="{{ full_name }}"
+        {%- if disabled %} disabled="disabled"{% endif -%}
+        {%- for attrname, attrvalue in attr -%}
+            {{- " " -}}
+            {%- if attrname in ['placeholder', 'title'] -%}
+                {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+            {%- elseif attrname in ['class'] -%}
+                {{- "class" }}="{{attrvalue}}"
+            {%- elseif attrvalue is sameas(true) -%}
+                {{- attrname }}="{{ attrname }}"
+            {%- elseif attrvalue is not sameas(false) -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endfor -%}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block _form_submit_widget %}
+    {% spaceless %}
+        {{  block('form_widget_simple') }}
+    {% endspaceless %}
+{% endblock _form_submit_widget %}
+
+{% block _form_submit_row %}
+    {% spaceless %}
+        <div class="pull-right">
+            {{ form_widget(form) }}
+        </div>
+        <div class="clearfix"></div>
+    {% endspaceless %}
+{% endblock _form_submit_row %}
