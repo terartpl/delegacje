@@ -5,7 +5,7 @@ Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać da
 Download files and copy to destination folder.</br>
 Create empty database.</br>
 Import tables:</br>
-<pre><code>mysql -u user_name -p db_name &le; delegations.sql</code></pre>
+<pre><code>mysql -u user_name -p db_name &lt; delegations.sql</code></pre>
 Create directory:</br>
 <pre>
 cd my_project_name/
