@@ -1,6 +1,6 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: @DelegationsBundle/Resources/config/parameters_delegation.yml }
+   # - { resource: @DelegationsBundle/Resources/config/parameters_delegation.yml }
     - { resource: @DelegationsBundle/Resources/config/security.yml }
 
 framework:
