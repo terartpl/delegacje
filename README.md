@@ -5,7 +5,7 @@ Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać da
 Download files and copy to destination folder.</br>
 Create empty database.</br>
 Import tables:</br>
-<pre><code>mysql -u user_name -p db_name < delegations.sql</code></pre>
+<pre><code>mysql -u user_name -p db_name &le; delegations.sql</code></pre>
 Create directory:</br>
 <pre>
 cd my_project_name/
@@ -28,6 +28,6 @@ php app/console assetic:dump
 Clear cache:
 <pre>php app/console cache:clear --no-debug</pre>
 Login to application:</br>
-link: <your_localhost>/login</br>
+link: your_localhost/login</br>
 login: admin</br>
 passwd: admin</br>
