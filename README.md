@@ -5,20 +5,14 @@ Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać da
 Download files and copy to destination folder.</br>
 Create empty database.</br>
 Import tables:</br>
-<pre>
-mysql -u user_name -p db_name < delegations.sql
-</pre>
+<pre><p>mysql -u user_name -p db_name < delegations.sql</p></pre>
 Create directory:</br>
-<pre>
-    cd my_project_name/
+<pre>cd my_project_name/
     mkdir app/cache
-    mkdir app/logs
-</pre>
+    mkdir app/logs</pre>
 if exist:</br>
-<pre>
-    rm -rf app/cache/*
-    rm -rf app/logs/*
-</pre>
+<pre>rm -rf app/cache/*
+    rm -rf app/logs/*</pre>
 Setting up Permissions:</br>
 See Setting up Permissions section on:</br>
 http://symfony.com/doc/current/book/installation.html</br>
