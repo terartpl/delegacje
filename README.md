@@ -1,4 +1,5 @@
-Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do systemu SAP
+Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku. Wkrótce dostępna będzie integracja z system SAP
+Delegation system allows your company to calculate all delegations of employees. Soon we plan to provide integration with SAP system
 
 <h1>Installation</h1>
 
