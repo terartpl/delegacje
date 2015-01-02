@@ -118,28 +118,29 @@ translations.userHasCompany: 'Nie można usunąć spółki, jeśli są zdefiniow
 translations.DelegationTypeList: 'Lista rodzajów delegacji'
 translations.CreateNewDelegationType: 'Dodaj nowy rodzaj delegacji'
 translations.DelegatiotypeName: Nazwa
-translations.DelegatiotypeView: Podgląd rodzaju delegacji
-translations.DelegatiotypeEdit: Edycja rodzaju delegacji
-translations.AddDelegationType: Dodaj rodzaj delegacji
-translations.DelegationTypeNotExist: Rodzaj delegacji nie istnieje
-translations.typeOfExpenditureList: Lista rodzajów wydatków
-translations.CreateNewexpenditure: Dodaj nowy typ wydatku
-translations.typeOfExpenditureNotFound: Nie znaleziono podanego rodzaju wydatku
-translations.typeOfExpenditureDeleted: Rodzaj wydatku został usunięty
-translations.typeOfExpenditureEdited: Edycja zakończona sukcesem
-translations.typeOfExpenditureAdded: Rodzaj wydatku został dodany
-translations.DelegatiotypeDeleted: Rodzaj delegacji został usunęty
-translations.DelegatiotypeEdited: Edycja zakończona sukcesem
-translations.DelegatiotypeAdded: Dodano nowy rodzaj delegacji
-translations.addLogo: Dodaj Logo
-translations.CostTripInView: Suma kosztów
+translations.DelegatiotypeView: 'Podgląd rodzaju delegacji'
+translations.DelegatiotypeEdit: 'Edycja rodzaju delegacji'
+translations.AddDelegationType: 'Dodaj rodzaj delegacji'
+translations.DelegationTypeNotExist: 'Rodzaj delegacji nie istnieje'
+translations.typeOfExpenditureList: 'Lista rodzajów wydatków'
+translations.CreateNewexpenditure: 'Dodaj nowy typ wydatku'
+translations.typeOfExpenditureNotFound: 'Nie znaleziono podanego rodzaju wydatku'
+translations.typeOfExpenditureDeleted: 'Rodzaj wydatku został usunięty'
+translations.typeOfExpenditureEdited: 'Edycja zakończona sukcesem'
+translations.typeOfExpenditureAdded: 'Rodzaj wydatku został dodany'
+translations.DelegatiotypeDeleted: 'Rodzaj delegacji został usunęty'
+translations.DelegatiotypeEdited: 'Edycja zakończona sukcesem'
+translations.DelegatiotypeAdded: 'Dodano nowy rodzaj delegacji'
+translations.addLogo: 'Dodaj Logo'
+translations.CostTripInView: 'Suma kosztów'
 translations.Shortcut: Skrót
-translations.DelegationTypePermmisionDenied: Akcja niedozwolona, istnieją delegacje z danym rodzajem.
-translations.typeOfExpenditurePermmisionDenied: Akcja niedozwolona, istnieją koszty z danym rodzajem.
-translations.CompanyHasBeenEdited: Dane o firmie zostały zaktualizowane
-translations.CompanyHasBeenDeleted: Firma została usunięta
-translations.CompanyHasBeenAdded: Dodano nową firmę
-translations.typeOfExpenditureCreate: Dodaj nowy rodzaj wydatku
-translations.typeOfExpenditureView: Podgląd rodzaju wydatku
-translations.typeOfExpenditureEdit: Edycja rodzaju wydatku
-translations.UsersView: Podgląd użytkownika
+translations.DelegationTypePermmisionDenied: 'Akcja niedozwolona, istnieją delegacje z danym rodzajem.'
+translations.typeOfExpenditurePermmisionDenied: 'Akcja niedozwolona, istnieją koszty z danym rodzajem.'
+translations.CompanyHasBeenEdited: 'Dane o firmie zostały zaktualizowane'
+translations.CompanyHasBeenDeleted: 'Firma została usunięta'
+translations.CompanyHasBeenAdded: 'Dodano nową firmę'
+translations.typeOfExpenditureCreate: 'Dodaj nowy rodzaj wydatku'
+translations.typeOfExpenditureView: 'Podgląd rodzaju wydatku'
+translations.typeOfExpenditureEdit: 'Edycja rodzaju wydatku'
+translations.UsersView: 'Podgląd użytkownika'
+'': null

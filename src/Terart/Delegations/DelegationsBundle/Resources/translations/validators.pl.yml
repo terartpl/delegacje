@@ -1,2 +1,3 @@
 translations.alphaNumericErrMsg: 'Podany tekst zawiera niedozwolone znaki. Dozwolone: ["a-z", "A-Z", "0-9", "_", "-", "/"]'
 translations.engineCapacityErrMsg: 'Ta wartość nie nie powinna być pusta'
+'': null

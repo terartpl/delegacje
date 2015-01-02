@@ -5,7 +5,7 @@
     <entity repository-class="Terart\Delegations\DelegationsBundle\Entity\Repository\TranslationsRepository"
             name="Terart\Delegations\DelegationsBundle\Entity\Translations" table="translations">
         <indexes>
-            <index name="key_locale" columns="hashKey,locale"/>
+            <index name="key_locale" columns="hash_key,locale"/>
         </indexes>
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

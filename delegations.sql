@@ -221,7 +221,6 @@ CREATE TABLE `migration_versions` (
 
 LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
-INSERT INTO `migration_versions` VALUES ('20141125095302');
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +394,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'administrator','administrator',1,'admin','3621e8f9001e26bd61e5f87121e67b51b6941a259cfdaff3f774c41d35cc3090472d86681c9bd23c54c2ea89de586d0a2820fef38f10f988fd9d34ad26fe9e9a','terart@terart.pl','147628475953317b485a871',1,'2014-11-18 00:00:00');
+INSERT INTO `users` VALUES (NULL,1,'administrator','administrator','admin','3621e8f9001e26bd61e5f87121e67b51b6941a259cfdaff3f774c41d35cc3090472d86681c9bd23c54c2ea89de586d0a2820fef38f10f988fd9d34ad26fe9e9a','terart@terart.pl','147628475953317b485a871',1,'2014-11-18 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

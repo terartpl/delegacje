@@ -44,24 +44,6 @@ security:
                 domain: ~ # Defaults to the current domain from $_SERVER
             security: true
             access_denied_url: /.*
-            #trusted_sso:
-            #    manager: admin_sso
-            #    login_action: false         # BeSimpleSsoAuthBundle:TrustedSso:login
-            #    logout_action: false        # BeSimpleSsoAuthBundle:TrustedSso:logout
-            #    create_users: true
-            #    created_users_roles: [ROLE_USER ]
-            #    check_path: /
-
-        sso_firewall:
-            pattern: ^/
-            anonymous: ~
-            trusted_sso:
-                manager: admin_sso
-                login_action: false         # BeSimpleSsoAuthBundle:TrustedSso:login
-                logout_action: false        # BeSimpleSsoAuthBundle:TrustedSso:logout
-                create_users: true
-                created_users_roles: [ROLE_USER ]
-                check_path: /
 
     access_control:
             #- { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

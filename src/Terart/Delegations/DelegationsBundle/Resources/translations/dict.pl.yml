@@ -5,7 +5,13 @@ translations.Representation: Reprezentacja
 translations.Others: Inne
 translations.National: Krajowa
 translations.Foreign: Zagraniczna
+translations.Training: Szkolenie
+translations.Conference: Konferencja
+translations.Meeting: 'Spotkanie z klientem'
 translations.ChooseOption: Wybierz
-translations.typeOfExpenditure: Rodzaj wydatku
-translations.TypeDelegation: Rodzaj delegacji
-translations.TargetCountryDelegations: Kraj docelowy delegacji
+translations.typeOfExpenditure: 'Rodzaj wydatku'
+translations.TypeDelegation: 'Rodzaj delegacji'
+translations.TargetCountryDelegations: 'Kraj docelowy delegacji'
+test: dupa-set
+sada: sdadsd
+'': null
