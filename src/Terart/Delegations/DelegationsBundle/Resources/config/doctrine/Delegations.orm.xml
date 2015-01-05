@@ -19,9 +19,9 @@
         <field name="dateTo" type="datetime" column="date_to" nullable="false"/>
         <field name="purposeOfTrip" type="text" column="purpose_of_trip" nullable="false"/>
         <field name="isPrivateCar" type="boolean" column="is_private_car" nullable="true"/>
-        <field name="address" type="text" column="address" nullable="false"/>
-        <field name="carNumber" type="string" column="car_number" length="50" nullable="false"/>
-        <field name="engineCapacity" type="integer" column="engine_capacity" precision="10" scale="0" nullable="false"/>
+        <field name="address" type="text" column="address" nullable="true"/>
+        <field name="carNumber" type="string" column="car_number" length="50" nullable="true"/>
+        <field name="engineCapacity" type="integer" column="engine_capacity" nullable="true" column-definition="TINYINT(1) UNSIGNED DEFAULT NULL" />
         <field name="status" type="integer" column="status" nullable="false"/>
         <field name="created" type="datetime" column="created" nullable="false"/>
         <field name="advance" type="decimal" column="advance" precision="10" scale="2" nullable="true"/>
