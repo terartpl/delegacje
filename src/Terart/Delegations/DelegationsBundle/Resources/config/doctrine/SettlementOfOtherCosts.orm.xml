@@ -12,10 +12,10 @@
         <field name="originalAmount" type="decimal" column="original_amount" precision="10" scale="2" nullable="false"/>
         <field name="currency" type="string" column="currency" length="3" nullable="false"/>
         <field name="isExchangeRate" type="boolean" column="is_exchange_rate" nullable="false"/>
-        <field name="exchangeRate" type="decimal" column="exchange_rate" precision="10" scale="4" nullable="false"/>
+        <field name="exchangeRate" type="decimal" column="exchange_rate" precision="10" scale="4" nullable="true"/>
         <field name="conversionAmount" type="decimal" column="conversion_amount" precision="10" scale="2"
                nullable="false"/>
-        <field name="description" type="text" column="description" nullable="false"/>
+        <field name="description" type="text" column="description" nullable="true"/>
         <many-to-one field="typeOfExpenditure" target-entity="TypeOfExpenditure">
             <join-columns>
                 <join-column name="type_of_expenditure_id" referenced-column-name="id"/>
