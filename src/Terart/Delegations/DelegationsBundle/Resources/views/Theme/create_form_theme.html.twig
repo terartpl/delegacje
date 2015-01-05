@@ -848,7 +848,9 @@
         {% if label is empty -%}
     {% set label = name|humanize %}
 {%- endif -%}
-        {% if label == 'translations.isExchangeRate' %}
+        {% if label == 'translations.lt' or label == 'translations.gte' %}
+            {{ label|trans({}, translation_domain) }}&nbsp;
+        {% elseif label == 'translations.isExchangeRate' %}
             &nbsp;&nbsp;&nbsp;&nbsp;<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
         {% else %}
     <div class="col-md-12">
