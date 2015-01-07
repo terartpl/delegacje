@@ -12,9 +12,6 @@ class GraphicsController
 
     public function resizeLogo($file)
     {
-//        var_dump($file);
-//        die;
-
         list($srcImgWidth, $srcImgHeight, $srcImgType) = getimagesize($file);
 
         switch ($srcImgType) {
@@ -33,9 +30,6 @@ class GraphicsController
             return false;
         }
 
-        $ratio = $srcImgWidth / $srcImgHeight;
-        $logoRatio = self::LOGO_WIDTH / self::LOGO_HEGIHT;
-
         if ($srcImgWidth <= self::LOGO_WIDTH && $srcImgHeight <= self::LOGO_HEGIHT) {
             $LOGO_WIDTH = $srcImgWidth;
             $LOGO_HEGIHT = $srcImgHeight;
@@ -46,7 +40,6 @@ class GraphicsController
         }
 
         $logImage = imagecreatetruecolor($LOGO_WIDTH, $LOGO_HEGIHT);
-//        imagecopyresampled($logImage, $srcImage, 0, 0, 0, 0, $LOGO_WIDTH, $LOGO_HEGIHT, $srcImgWidth, $srcImgHeight);
         imagecopyresampled($logImage, $srcImage, 0, 0, 0, 0, $LOGO_WIDTH, $LOGO_HEGIHT, $srcImgWidth, $srcImgHeight);
         imagejpeg($logImage, $file, 90);
         imagedestroy($srcImage);

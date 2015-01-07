@@ -62,7 +62,6 @@ class TypeOfExpenditureType extends AbstractType
             }
             unset($translation);
             $data->setTranslations($translated);
-            //var_dump($data, get_class_methods($data), 'POST_SUBMIT'); die;
             $event->setData($data);
         });
 
@@ -80,12 +79,10 @@ class TypeOfExpenditureType extends AbstractType
                 $data->setTranslations($newData);
             }
             $event->setData($data);
-            //var_dump($data, 'PRE_SET_DATA'); //die(__FUNCTION__);
         });
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
             $data = $event->getData();
-            //var_dump($data, 'POST_SET_DATA'); //die(__FUNCTION__);
         });
     }
 

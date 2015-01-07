@@ -36,8 +36,6 @@ class DelegationTypeType extends AbstractType
                 $data['trans'][$transKey] = $translation;
             }
             $event->setData($data);
-            // var_dump($data, $newData); die;
-
         });
 
 
@@ -52,11 +50,11 @@ class DelegationTypeType extends AbstractType
             }
         });
 
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+       /* $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
             $data = $event->getData();
 
             //$event->setData($newData);
-        });
+        });*/
 
     }
 
@@ -66,7 +64,6 @@ class DelegationTypeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            //'data_class' => 'Terart\Delegations\DelegationsBundle\Entity\DelegationType',
             'data_class' => null,
             'translation_domain' => 'DelegationsBundle',
             'locale' => 'String',
