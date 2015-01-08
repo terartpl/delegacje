@@ -1,5 +1,5 @@
-Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku. Wkrótce dostępna będzie integracja z system SAP<br />
-Delegation system allows your company to calculate all delegations of employees. Soon we plan to provide integration with SAP system
+Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku.<br />
+Delegation system allows your company to calculate all delegations of employees.
 
 <h1>Installation</h1>
 
@@ -38,11 +38,28 @@ Login to application:<br>
 link: your_localhost/login<br>
 login: admin<br>
 passwd: admin<br>
-
-Below screenshots from application<br>
-<br>![alt text](http://www.tercom.pl/delegacje/delegation_create_screen.png "Create new delegation")<br>
+<br>
+___
+<h5>Below screenshots from application</h5>
+![alt text](http://www.tercom.pl/delegacje/delegation_create_screen.png "Create new delegation")<br>
 <br>![alt text](http://www.tercom.pl/delegacje/add_user.png "Add user")<br>
 <br>![alt text](http://www.tercom.pl/delegacje/delegation_list.png "Delegation list")<br>
 <br>![alt text](http://www.tercom.pl/delegacje/delegation_type_list.png "Delegation type list")<br>
 <br>![alt text](http://www.tercom.pl/delegacje/expenditure_list.png "Expenditure type list")<br>
 <br>![alt text](http://www.tercom.pl/delegacje/users_list.png "Users list")<br>
+
+***
+<h4>Enterprise version</h4>
+There is also enterprise version available with more features:<br>
+1. SAP integration.<br> 
+2. Workflow which allows to set validator users who need to validate user delegations.<br>
+3. Show delegations of other users. You can select which user delegation you want to see. Option only available for users with special access right added by admin.<br>
+4. Reports and charts.<br>
+<br>
+If you are interested in enterprise version please contact us at<br>
+Usługi Informatyczne TER-ART Wojciech Terpiłowski<br>
+Dekoracyjna 3<br>
+65-155 Zielona Góra<br>
+Polska<br>
+VAT ID PL9730454764<br>
+**terart@terart.pl**<br>tel. **0048 501437601**
