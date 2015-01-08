@@ -38,3 +38,11 @@ Login to application:<br>
 link: your_localhost/login<br>
 login: admin<br>
 passwd: admin<br>
+
+Below screenshots from application<br>
+<br>![alt text](http://www.tercom.pl/delegacje/delegation_create_screen.png "Create new delegation")<br>
+<br>![alt text](http://www.tercom.pl/delegacje/add_user.png "Add user")<br>
+<br>![alt text](http://www.tercom.pl/delegacje/delegation_list.png "Delegation list")<br>
+<br>![alt text](http://www.tercom.pl/delegacje/delegation_type_list.png "Delegation type list")<br>
+<br>![alt text](http://www.tercom.pl/delegacje/expenditure_list.png "Expenditure type list")<br>
+<br>![alt text](http://www.tercom.pl/delegacje/users_list.png "Users list")<br>
