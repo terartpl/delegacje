@@ -41,12 +41,12 @@ passwd: admin<br>
 <br>
 ___
 <h5>Below screenshots from application</h5>
-![alt text](http://www.tercom.pl/delegacje/delegation_create_screen.png "Create new delegation")<br>
-<br>![alt text](http://www.tercom.pl/delegacje/add_user.png "Add user")<br>
-<br>![alt text](http://www.tercom.pl/delegacje/delegation_list.png "Delegation list")<br>
-<br>![alt text](http://www.tercom.pl/delegacje/delegation_type_list.png "Delegation type list")<br>
-<br>![alt text](http://www.tercom.pl/delegacje/expenditure_list.png "Expenditure type list")<br>
-<br>![alt text](http://www.tercom.pl/delegacje/users_list.png "Users list")<br>
+![Create new delegation](http://www.tercom.pl/delegacje/delegation_create_screen.png)<br>
+<br>![Add user](http://www.tercom.pl/delegacje/add_user.png)<br>
+<br>![Delegation list](http://www.tercom.pl/delegacje/delegation_list.png)<br>
+<br>![Delegation type list](http://www.tercom.pl/delegacje/delegation_type_list.png)<br>
+<br>![Expenditure type list](http://www.tercom.pl/delegacje/expenditure_list.png)<br>
+<br>![Users list](http://www.tercom.pl/delegacje/users_list.png)<br>
 
 ***
 <h4>Enterprise version</h4>
