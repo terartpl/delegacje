@@ -57,9 +57,12 @@ There is also enterprise version available with more features:<br>
 4. Reports and charts.<br>
 <br>
 If you are interested in enterprise version please contact us at<br>
-Usługi Informatyczne TER-ART Wojciech Terpiłowski<br>
-Dekoracyjna 3<br>
-65-155 Zielona Góra<br>
-Polska<br>
-VAT ID PL9730454764<br>
-**terart@terart.pl**<br>tel. **0048 501437601**
+```
+Usługi Informatyczne TER-ART Wojciech Terpiłowski
+Dekoracyjna 3
+65-155 Zielona Góra
+Polska
+VAT ID PL9730454764
+terart@terart.pl
+tel. 0048 501437601
+```
