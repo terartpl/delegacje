@@ -1,4 +1,12 @@
 Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku.<br />
+1. Rozliczanie delegacji na podstawie realnych kosztów (brak diet)<br />
+2. Rozliczanie "kilometrówki"
+3. Możliwość definiowania własnych rodzajów kosztów
+4. Integracja z systemem SAP
+5. Definiowanie oddziałów firmy
+6. Eksport do pliku
+7. Całkowicie za darmo
+
 Delegation system allows your company to calculate all delegations of employees.
 
 <h1>Installation</h1>
@@ -40,7 +48,7 @@ login: admin<br>
 passwd: admin<br>
 <br>
 ___
-<h5>Below screenshots from application</h5>
+<h5>Below screenshots from application</h5><br />
 ![Create new delegation](http://www.tercom.pl/delegacje/delegation_create_screen.png)<br>
 <br>![Add user](http://www.tercom.pl/delegacje/add_user.png)<br>
 <br>![Delegation list](http://www.tercom.pl/delegacje/delegation_list.png)<br>
