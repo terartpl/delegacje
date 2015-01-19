@@ -1,11 +1,11 @@
 Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku.<br />
 1. Rozliczanie delegacji na podstawie realnych kosztów (brak diet)<br />
-2. Rozliczanie "kilometrówki"
-3. Możliwość definiowania własnych rodzajów kosztów
-4. Integracja z systemem SAP
-5. Definiowanie oddziałów firmy
-6. Eksport do pliku
-7. Całkowicie za darmo
+2. Rozliczanie "kilometrówki"<br />
+3. Możliwość definiowania własnych rodzajów kosztów<br />
+4. Integracja z systemem SAP<br />
+5. Definiowanie oddziałów firmy<br />
+6. Eksport do pliku<br />
+7. Całkowicie za darmo<br />
 
 Delegation system allows your company to calculate all delegations of employees.
 
