@@ -17,13 +17,20 @@ Create directory:<br>
 <pre>
 $ cd my_project_name/<br>
 $ mkdir app/cache<br>
-$ mkdir app/logs</pre>
+$ mkdir app/logs<br>
+$ mkdir web/logo</pre>
 or if exist:<br>
 <pre>
 $ rm -rf app/cache/*<br>
 $ rm -rf app/logs/*</pre>
-Setting up Permissions:<br>
+Setting up Permissions based on Symfony documentation:<br>
 See: <a href="http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup">Setting up Permissions section</a><br>
+Set permission for logo directory:<br><br>
+<pre>
+$ chmod 777 web/logo
+</pre>
+<br>
+
 Then run a composer update on command line:
 <pre>$ php composer.phar update</pre>
 Import tables:<br>
