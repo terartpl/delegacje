@@ -30,7 +30,6 @@ Set permission for logo directory:<br><br>
 $ chmod 777 web/logo
 </pre>
 <br>
-
 Then run a composer update on command line:
 <pre>$ php composer.phar update</pre>
 Import tables:<br>
