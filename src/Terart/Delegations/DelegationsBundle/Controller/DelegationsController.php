@@ -660,7 +660,7 @@ class DelegationsController extends Controller
         }
         $em->clear();
         $entity->setStatus(1);
-        //var_dump($entity->getType()); die;
+        $entity = $em->merge($entity);
         $em->flush();
         $this->get('session')->getFlashBag()->add(
             'success',
