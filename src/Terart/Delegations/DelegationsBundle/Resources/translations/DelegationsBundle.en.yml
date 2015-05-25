@@ -79,8 +79,8 @@ translations.logInAs: "Logged in as"
 translations.lt: "Less than 2.0"
 translations.gte: "Greater or equal than 2.0"
 translations.SettlementAll: "Summary of the costs"
-translations.ViewDelegation: "Delegation edit"
-translations.EditDelegation: "Delegation view"
+translations.EditDelegation: "Delegation edit"
+translations.ViewDelegation: "Delegation view"
 translations.ltCanonical: lt_2
 translations.gteCanonical: gte_2
 translations.Status: "Status"

@@ -517,6 +517,7 @@ class DelegationsController extends Controller
             return $this->redirect($this->generateUrl('delegations'));
         }
         $em = $this->getDoctrine()->getManager();
+        $em->clear();
         $entity = $em->getRepository('DelegationsBundle:Delegations')->find($id);
         $entitySettlementsKm = $em->getRepository('DelegationsBundle:DelegationKmGroup')->findBy(array('delegation' => $entity->getId()));
         $entitySettlementsOt = $em->getRepository('DelegationsBundle:DelegationOtherCosts')->findBy(array('delegation' => $entity->getId()));
@@ -541,7 +542,6 @@ class DelegationsController extends Controller
             if ($fs->exists($filepath . '/' . $filename)) {
                 $fs->remove(array($filepath . '/' . $filename));
             }
-            //$fs->touch($filepath . '/' . $filename);
             //$fs->dumpFile($filepath.'/'.$filename, 'Hello World 1');
             unset($fs);
             $fp = fopen($filepath . '/' . $filename, 'w');
@@ -555,7 +555,7 @@ class DelegationsController extends Controller
             }
             $delegationData = ',"' . $entity->getNrDelegation() .
                 '","' . addslashes($entity->getPlaceACost()) . '","' .
-                $entity->getType()->getTrans() . '","' .
+                $em->getRepository('DelegationsBundle:DelegationType')->findTranslationsByHashAndLocale($entity->getType()->getHashKey(), $request->getLocale()) . '","' .
                 $this->get('translator')->trans($entity->getTargetCountryType()->getName(), array(), "dict") . '","' .
                 $targetCountry . '","' .
                 addslashes($entity->getDestination()) . '","' .
@@ -658,8 +658,9 @@ class DelegationsController extends Controller
         } catch (IOExceptionInterface $e) {
             echo "An error occurred while creating your directory at " . $e->getPath() . ' ' . $e->getMessage();
         }
+        $em->clear();
         $entity->setStatus(1);
-        $em = $this->getDoctrine()->getManager();
+        $entity = $em->merge($entity);
         $em->flush();
         $this->get('session')->getFlashBag()->add(
             'success',

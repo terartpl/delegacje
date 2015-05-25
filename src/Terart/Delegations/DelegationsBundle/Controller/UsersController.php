@@ -435,8 +435,6 @@ class UsersController extends Controller
      */
     public function addLogoAction(Request $request)
     {
-//        session_unset();
-//        sleep(10);
         $img = null;
         $dir = $this->get('kernel')->getRootDir() . '/../web/logo/default_logo.png';
         $form = $this->createAddLogoFrom()->getForm();
@@ -452,10 +450,6 @@ class UsersController extends Controller
                     'class' => 'btn btn-default btn-danger'
                 )));
         }
-
-//        var_dump($img->getOwner());
-//        var_dump(get_class_methods($img));
-//        var_dump($this->get('request')->getBasePath());
 
         return array(
             'img' => $img,
@@ -474,8 +468,6 @@ class UsersController extends Controller
      */
     public function uplaodAction(Request $request)
     {
-        $imgValidator = new  Image();
-//        $imgValidator->message = 'Invalid file format';
         $img = null;
         $dir = $dir = $this->get('kernel')->getRootDir() . '/../web/logo';
         $fileName = 'default_logo.png';
@@ -487,33 +479,9 @@ class UsersController extends Controller
             )));
 
         $form->handleRequest($request);
-//        $data = $form->getData();
 
-//        var_dump(get_class_methods($imgValidator));
-//        die;
-
-//        $errors = $this->get('validator')->validate(
-//            $data['logo'],
-//            $imgValidator
-//        );
-
-//        var_dump($data);
-//        var_dump($errors);
-//        die;
-
-//        if(count($errors) > 0){
-//            return $this->redirect($this->generateUrl('users_logo_upload', array(
-//                'form' => $form
-//            )));
-//        }
 
         if(!$form->isValid()){
-
-//            $form->getErrorsAsString();
-//            var_dump($form->getErrorsAsString());
-//            var_dump($form->get('logo')->getErrors()[0]);
-//            die;
-
             return array(
                 'img' => null,
                 'form' => $form->createView()
@@ -522,12 +490,6 @@ class UsersController extends Controller
 
         $btn = $form->getClickedButton()->getName();
         $img = $form['logo']->getData();
-
-//        var_dump($img->getMimeType());
-//        var_dump(get_class_methods($img));
-//        die;
-
-//        $mTypes =
         if ($img) {
             
             $sim = $this->get('delegations.simple_image_manipulator');
@@ -600,9 +562,6 @@ class UsersController extends Controller
             ))
             ->setAction($this->generateUrl('users_logo_upload'))
             ->setMethod('POST');
-
-//        var_dump(get_class_methods($form->get('logo')));
-//        die;
 
         return $form;
     }

@@ -25,7 +25,6 @@ framework:
         handler_id:  ~ #session.handler.native_file
         #save_path:   %kernel.cache_dir%/sessions
     fragments:       ~
-    http_method_override: true
 
 # Twig Configuration
 twig:

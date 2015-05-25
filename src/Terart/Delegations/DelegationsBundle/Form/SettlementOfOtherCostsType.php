@@ -86,38 +86,8 @@ class SettlementOfOtherCostsType extends AbstractType
                 $data->setTypeOfExpenditure($typeOfExpenditure);
                 $event->setData($data);
             }
-            /*var_dump($data);
-            die('POST_SUBMIT');*/
-            //var_dump('POST_SUBMIT');
         });
 
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-            //var_dump($form); die('POST_SET_DATA');
-            //var_dump('POST_SET_DATA');
-        });
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-            //var_dump($data); die('PRE_SET_DATA');
-            //var_dump('PRE_SET_DATA');
-        });
-
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-            //var_dump($data); die('PRE_SUBMIT');
-            //var_dump('PRE_SUBMIT');
-        });
-
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            $data = $event->getData();
-            $form = $event->getForm();
-            //var_dump($data); die('SUBMIT');
-            //var_dump('SUBMIT');
-        });
 
     }
 

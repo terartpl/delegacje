@@ -47,6 +47,7 @@ class CompanyController extends Controller
             return $this->redirect($this->generateUrl('delegations', array()));
         }
 
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DelegationsBundle:Company')->findAll();
