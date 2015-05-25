@@ -230,7 +230,7 @@
                 });
 
             });
-            var settlementIdInx = 0;
+            var settlementIdInx = {{ form.vars.value.settlementKm.settlementKm|length|default("0") }};
             $('#settlementKmAdd').click(function(e){
                 e.preventDefault();
                 $('#modal_form').remove();
@@ -402,7 +402,7 @@
             renderSettlementKm(settlementKmEditColl);
 
             //other cost
-            var settlementOtIdInx = 0;
+            var settlementOtIdInx = {{ form.vars.value.settlementOther.settlementOfOtherCost|length|default("0") }};
             $('#settlementOtherAdd').click(function(e){
                 e.preventDefault();
                 $('#modal_form_other').remove();

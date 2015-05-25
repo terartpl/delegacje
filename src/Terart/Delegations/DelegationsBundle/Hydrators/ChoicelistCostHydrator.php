@@ -17,20 +17,20 @@ class ChoicelistCostHydrator extends AbstractHydrator
         $result = array();
         $cache = array();
         foreach ($this->_stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-            $this->hydrateRowData($row, $cache, $result);
+            $this->hydrateRowData($row, $result);
         }
 
         return $result;
     }
 
-    protected function hydrateRowData(array $row, array &$cache, array &$result)
+    protected function hydrateRowData(array $row, array &$result)
     {
         if (count($row) == 0) {
             return false;
         }
         $id = $this->_idTemplate; // initialize the id-memory
         $nonemptyComponents = array();
-        $rowData = $this->gatherRowData($row, $cache, $id, $nonemptyComponents);
+        $rowData = $this->gatherRowData($row, $id, $nonemptyComponents);
         if (!isset($rowData['scalars']) || empty($rowData['scalars'])) {
             return false;
         }
