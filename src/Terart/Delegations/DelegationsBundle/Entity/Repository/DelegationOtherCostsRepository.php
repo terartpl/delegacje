@@ -32,4 +32,18 @@ class DelegationOtherCostsRepository extends EntityRepository
             );
         return $query->getResult('choicelistCost');
     }
+
+    public function findTranslation($id, $locale)
+    {
+        if (!$id || !is_string($locale)) {
+            return array();
+        }
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT e.id, e.expenditure, t.trans as expenditure FROM DelegationsBundle:TypeOfExpenditure e
+              LEFT JOIN DelegationsBundle:Translations t WHERE t.hashKey = e.expenditure AND t.locale = \'' . $locale . '\'
+            WHERE e.id = ' . $id
+            );
+        return $query->getResult('choicelistCost');
+    }
 } 

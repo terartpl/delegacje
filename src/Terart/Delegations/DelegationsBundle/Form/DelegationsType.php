@@ -227,28 +227,26 @@ class DelegationsType extends AbstractType
         $locale = $form->getConfig()->getOptions()['locale'];
         $data = $form->getData();
 
-        if (is_object($data) && $data->getId()) {
-            $group = new DelegationOtherCosts();
-            $groupArray = $em->getRepository("DelegationsBundle:DelegationOtherCosts")->findBy(array('delegation' => $data->getId()));
-            $trans = $em->getRepository("DelegationsBundle:DelegationOtherCosts")->findAllTranslations($data->getId(), $locale);
-            $resultGr = array();
-            foreach ($groupArray as $gr) {
-                $expenditure = $gr->getSettlementOfOtherCost()->getTypeOfExpenditure();
-                if (is_string($expenditure)) {
-                    continue;
+        if (is_object($data)) {
+            if($settlement = $data->getSettlementOther()){
+                $costs = $settlement->getSettlementOfOtherCost();
+                foreach($costs as $key => $cost){
+                    $type = $cost->getTypeOfExpenditure();
+                    if(is_string($type)){
+                        continue;
+                    }
+                    $trans = $em->getRepository("DelegationsBundle:DelegationOtherCosts")->findTranslation($type->getId(), $locale);
+                    if (isset($trans[$type->getId()])) {
+                        $opt = array(
+                            'id' => $type->getId(),
+                            'expenditure' => $trans[$type->getId()],
+                        );
+                        $costs[$key]->setTypeOfExpenditure(json_encode($opt));
+                    }
                 }
-                if (isset($trans[$expenditure->getId()])) {
-                    $opt = array(
-                        'id' => $expenditure->getId(),
-                        'expenditure' => $trans[$expenditure->getId()],
-                    );
-                    $gr->getSettlementOfOtherCost()->setTypeOfExpenditure(json_encode($opt));
-                    array_push($resultGr, $gr->getSettlementOfOtherCost());
-                }
-            }
-            if (!empty($resultGr)) {
-                $group->setSettlementOfOtherCost($resultGr);
-                $form->getData()->setSettlementOther($group);
+
+                $settlement->setSettlementOfOtherCost($costs);
+                $form->getData()->setSettlementOther($settlement);
             }
 
         }
