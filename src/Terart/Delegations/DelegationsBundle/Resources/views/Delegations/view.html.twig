@@ -6,6 +6,14 @@
             <td class="nopadding-top-bottom">{{ entity.nrDelegation }}</td>
         </tr>
         <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Name'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.user.name }}</td>
+        </tr>
+        <tr>
+            <th class="nopadding-top-bottom">{{ 'translations.Surname'|trans({}, 'DelegationsBundle') }}:</th>
+            <td class="nopadding-top-bottom">{{ entity.user.surname }}</td>
+        </tr>
+        <tr>
             <th class="nopadding-top-bottom">{{ 'translations.Placeacost'|trans({}, 'DelegationsBundle') }}:</th>
             <td class="nopadding-top-bottom">{{ entity.placeACost }}</td>
         </tr>
