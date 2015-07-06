@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Delegacje : Delegation system based on Symfony2 framework + bootstrap for mid-size and big companies">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Delegacje</title>
+    <meta charset="UTF-8">
+    <title>Delegacje by terartpl</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Delegacje</h1>
+      <h2 class="project-tagline">Delegation system based on Symfony2 framework + bootstrap for mid-size and big companies</h2>
+      <a href="https://github.com/terartpl/delegacje" class="btn">View on GitHub</a>
+      <a href="https://github.com/terartpl/delegacje/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/terartpl/delegacje/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/terartpl/delegacje">View on GitHub</a>
+    <section class="main-content">
+      <p>Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku.<br>
+1. Rozliczanie delegacji na podstawie realnych kosztów (brak diet)<br>
+2. Rozliczanie "kilometrówki"<br>
+3. Możliwość definiowania własnych rodzajów kosztów<br>
+4. Definiowanie oddziałów firmy<br>
+5. Eksport do pliku<br>
+6. Całkowicie za darmo<br></p>
 
-          <h1 id="project_title">Delegacje</h1>
-          <h2 id="project_tagline">Delegation system based on Symfony2 framework + bootstrap for mid-size and big companies</h2>
+<p>W wersji Enterprise dostępne są następujące funkcje:<br>
+1. Integracja z systemem SAP.<br>
+2. Workflow (obieg dokumentów) - pozwala ustalić strukturę i na jej podstawie przełożeni akceptują lub odrzucają delegacje.<br>
+3. Pokazywanie delegacji innych użytkowników. Jako użytkownik z takim uprawnieniem możesz przeglądać delegacje innych użytkowników.<br>
+4. Raporty oraz wykresy.<br>
+5. Filtrowanie delegacji. Możesz wyszykiwać delegacje na podstawie różnych parametrów.<br>
+6. Changelog (historia zmian). Dzięki tej opcji możesz śledzić wszystkie akcje wykonane na danej delegacji. Jeżeli włączona jest opcja "Workflow" to widoczne są również zatwierdzenia lub odrzucenia delegacji przez przełożonego wraz z komentarzami.<br></p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/terartpl/delegacje/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/terartpl/delegacje/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać dane do pliku.<br>
-Delegation system allows your company to calculate all delegations of employees.</p>
+<p>Delegation system allows your company to calculate all delegations of employees.</p>
 
 <h1>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
@@ -45,18 +48,29 @@ Create directory:<br></p>
 <pre>
 $ cd my_project_name/<br>
 $ mkdir app/cache<br>
-$ mkdir app/logs</pre>
+$ mkdir app/logs<br>
+$ mkdir web/logo</pre>
 or if exist:<br>
 <pre>
 $ rm -rf app/cache/*<br>
 $ rm -rf app/logs/*</pre>
-Setting up Permissions:<br>
+Setting up Permissions based on Symfony documentation:<br>
 See: <a href="http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup">Setting up Permissions section</a><br>
-Then run a composer update on command line:
+<br>Set permission for logo directory:<br>
+<pre>
+$ chmod 777 web/logo
+</pre>
+
+<p>Then run a composer update on command line:</p>
+
 <pre>$ php composer.phar update</pre>
-Import tables:<br>
+
+<p>Import tables:<br></p>
+
 <pre><code>$ mysql -u user_name -p db_name &lt; delegations.sql</code></pre>
-or you can also create the database tables schema from entities:<br>
+
+<p>or you can also create the database tables schema from entities:<br></p>
+
 <pre><code>
 $ php app/console doctrine:schema:update --force<br>
 $ php app/console delegation:db:add-data<br>
@@ -80,15 +94,14 @@ passwd: admin<br>
 
 <hr>
 
-<h5>
-<a id="below-screenshots-from-application" class="anchor" href="#below-screenshots-from-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Below screenshots from application</h5>
-
-<p><img src="http://www.tercom.pl/delegacje/delegation_create_screen.png" alt="Create new delegation"><br>
+<p></p><h5>
+<a id="below-screenshots-from-application" class="anchor" href="#below-screenshots-from-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Below screenshots from application</h5><br>
+<img src="http://www.tercom.pl/delegacje/delegation_create_screen.png" alt="Create new delegation"><br>
 <br><img src="http://www.tercom.pl/delegacje/add_user.png" alt="Add user"><br>
 <br><img src="http://www.tercom.pl/delegacje/delegation_list.png" alt="Delegation list"><br>
 <br><img src="http://www.tercom.pl/delegacje/delegation_type_list.png" alt="Delegation type list"><br>
 <br><img src="http://www.tercom.pl/delegacje/expenditure_list.png" alt="Expenditure type list"><br>
-<br><img src="http://www.tercom.pl/delegacje/users_list.png" alt="Users list"><br></p>
+<br><img src="http://www.tercom.pl/delegacje/users_list.png" alt="Users list"><br>
 
 <hr>
 
@@ -100,6 +113,8 @@ passwd: admin<br>
 2. Workflow which allows to set validator users who need to validate user delegations.<br>
 3. Show delegations of other users. You can select which user delegation you want to see. Option only available for users with special access right added by admin.<br>
 4. Reports and charts.<br>
+5. Delegation filters. You can select delegations based on different parameters.<br>
+6. Changelog. You can track all operations on delegation. Also you will see there acceptance or decline of delegation with the comment of the validator when workflow is enabled.<br>
 <br>
 If you are interested in enterprise version please contact us at<br></p>
 
@@ -111,18 +126,16 @@ VAT ID PL9730454764
 terart@terart.pl
 tel. 0048 501437601
 </code></pre>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Delegacje maintained by <a href="https://github.com/terartpl">terartpl</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/terartpl/delegacje">Delegacje</a> is maintained by <a href="https://github.com/terartpl">terartpl</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
+
