@@ -6,6 +6,14 @@ Aplikacja delegacje pozwala rozliczyć delegacje pracowników oraz przesłać da
 5. Eksport do pliku<br />
 6. Całkowicie za darmo<br />
 
+W wersji Enterprise dostępne są następujące funkcje:<br />
+1. Integracja z systemem SAP.<br />
+2. Workflow (obieg dokumentów) - pozwala ustalić strukturę i na jej podstawie przełożeni akceptują lub odrzucają delegacje.<br />
+3. Pokazywanie delegacji innych użytkowników. Jako użytkownik z takim uprawnieniem możesz przeglądać delegacje innych użytkowników.<br />
+4. Raporty oraz wykresy.<br />
+5. Filtrowanie delegacji. Możesz wyszykiwać delegacje na podstawie różnych parametrów.<br />
+6. Changelog (historia zmian). Dzięki tej opcji możesz śledzić wszystkie akcje wykonane na danej delegacji. Jeżeli włączona jest opcja "Workflow" to widoczne są również zatwierdzenia lub odrzucenia delegacji przez przełożonego wraz z komentarzami.<br />
+
 Delegation system allows your company to calculate all delegations of employees.
 
 <h1>Installation</h1>
