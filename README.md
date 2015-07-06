@@ -67,6 +67,8 @@ There is also enterprise version available with more features:<br>
 2. Workflow which allows to set validator users who need to validate user delegations.<br>
 3. Show delegations of other users. You can select which user delegation you want to see. Option only available for users with special access right added by admin.<br>
 4. Reports and charts.<br>
+5. Delegation filters. You can select delegations based on different parameters.<br>
+6. Changelog. You can track all operations on delegation. Also you will see there acceptance or decline of delegation with the comment of the validator when workflow is enabled.<br>
 <br>
 If you are interested in enterprise version please contact us at<br>
 ```
